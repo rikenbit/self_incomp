@@ -21,7 +21,7 @@ X = x_csv.values
 
 
 # ランダムフォレスト
-clf = RandomForestClassifier(random_state=1234)
+clf = RandomForestClassifier(random_state=1234, n_estimators=1000)
 
 # LeaveOneOutの作成
 loocv = LeaveOneOut()
@@ -31,4 +31,8 @@ score = cross_val_score(clf, X, y, cv=loocv)
 
 # LOOCVの結果 https://panda-clip.com/loocv/
 print("{:.4f}".format(np.mean(score)))
+################################################################
+
+#### ハイパラ選定#################################################
+
 ################################################################
