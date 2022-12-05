@@ -56,7 +56,7 @@ X = x_csv.values
 
 
 # ランダムフォレスト
-clf = RandomForestClassifier(random_state=1234, n_estimators=1000, max_depth=5)
+clf = RandomForestClassifier(random_state=1234, n_estimators=1000, max_depth=10)
 
 # LeaveOneOutの作成
 loocv = LeaveOneOut()
