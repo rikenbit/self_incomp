@@ -33,7 +33,7 @@
 # print("{:.4f}".format(np.mean(score)))
 # ################################################################
 
-#### ハイパラ選定#################################################
+#### ハイパラ選定：RandomForestClassifier#################################################
 import pandas as pd
 import numpy as np
 #ランダムフォレスト
@@ -56,7 +56,7 @@ X = x_csv.values
 
 
 # ランダムフォレスト
-clf = RandomForestClassifier(random_state=1234, n_estimators=1000, max_depth=10)
+clf = RandomForestClassifier(random_state=1234, n_estimators=1000)
 
 # LeaveOneOutの作成
 loocv = LeaveOneOut()
