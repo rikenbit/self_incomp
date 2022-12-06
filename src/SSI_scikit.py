@@ -87,6 +87,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 #LeaveOneOutのimport
 from sklearn.model_selection import LeaveOneOut
+# PCA
+from sklearn.decomposition import PCA
 
 # データ読み込み
 x_csv = pd.read_csv("./output/SSI/x_r.csv")
@@ -97,8 +99,7 @@ y = y_csv["x"].values
 # 実データのベクトルX
 X = x_csv.values
 #### PCA####
-from sklearn.decomposition import PCA
-model_pca = PCA(n_components=10)
+model_pca = PCA(n_components=50)
 X_PCA = model_pca.fit_transform(x_csv)
 ########
 
