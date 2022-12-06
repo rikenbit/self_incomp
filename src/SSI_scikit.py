@@ -99,7 +99,7 @@ y = y_csv["x"].values
 # 実データのベクトルX
 X = x_csv.values
 #### PCA####
-model_pca = PCA(n_components=100)
+model_pca = PCA(n_components=5)
 X_PCA = model_pca.fit_transform(x_csv)
 ########
 
