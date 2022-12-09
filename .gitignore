@@ -20,3 +20,5 @@ slurm*
 .local/*
 .Rproj.user
 *.fuse*
+*.ipynb
+logs.log

@@ -14,7 +14,7 @@ library(rTensor)
 
 .randomPairs <- function(seq1, seq2, nr){
     # https://qiita.com/maech/items/83d1b3a85b976ffcdaf6
-    combi <- expand.grid(seq(nr), seq(nr))  
+    combi <- expand.grid(seq(nr), seq(nr))
     idx <- subset(combi, Var1 != Var2)
     idx <- idx[sample(nrow(idx), nr), ]
     cbind(seq1[idx[,1], ], seq2[idx[,2], ])
@@ -60,3 +60,12 @@ Y <- c(rep(1, 90), rep(0, 90))
 # Export X & Y for Python
 write.csv(X,"output/SSI/x_r.csv", row.names = FALSE)
 write.csv(Y,"output/SSI/y_r.csv", row.names = FALSE)
+
+# # Export XY for Python
+# X_names <- c()
+# for(i in 1:ncol(X)){
+#    X_names <- c(X_names, paste("V", i, sep=""))
+#   }
+# colnames(X) <- X_names
+# XY <- cbind(X, Y)
+# write.csv(XY,"output/SSI/xy_r.csv", row.names = FALSE)
