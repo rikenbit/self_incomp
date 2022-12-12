@@ -15,7 +15,8 @@ from sklearn.decomposition import PCA
 from pycaret.classification import *
 
 # データ読み込み
-x_csv = pd.read_csv("./output/SSI/x_r.csv")
+# x_csv = pd.read_csv("./output/SSI/x_r.csv")
+x_csv = pd.read_csv("./output/SSI/x_s_r.csv")
 y_csv = pd.read_csv("./output/SSI/y_r.csv")
 
 #### PCA####
@@ -36,5 +37,6 @@ clf1 = setup(data = XY, target = 'x')
 compare_models()
 df_compare_models = pull()
 
-df_compare_models.to_csv('output/SSI/compare_models.csv')
+# df_compare_models.to_csv('output/SSI/compare_models.csv')
+df_compare_models.to_csv('output/SSI/compare_models_randamX.csv')
 ########################################################

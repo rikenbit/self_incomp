@@ -13,7 +13,8 @@ from sklearn.model_selection import LeaveOneOut
 from sklearn.decomposition import PCA
 
 # データ読み込み
-x_csv = pd.read_csv("./output/SSI/x_r.csv")
+# x_csv = pd.read_csv("./output/SSI/x_r.csv")
+x_csv = pd.read_csv("./output/SSI/x_s_r.csv")
 y_csv = pd.read_csv("./output/SSI/y_r.csv")
 
 # 実データのベクトルY
