@@ -88,6 +88,7 @@ LRTensor[1:180, 1:99, 1:21] <- LigandTensor
 LRTensor[1:180, (99+1):(99+108), 1:21] <- ReceptorTensor
 
 #### switch####
+set.seed(1234)
 X <- switch(args_model,
             "1" = Model1(LRTensor, dim_gene_x2, dim_site_LR, dim_aa),
             "2" = Model2(LRTensor, dim_site_LR, dim_aa),
