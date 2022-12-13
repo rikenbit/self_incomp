@@ -13,15 +13,15 @@ dim_site_R     <- as.numeric(args[8])
 dim_site_LR    <- dim_site_L + dim_site_R
 
 #### test args####
-args_input_sp  <- c("data/multi_align_gap/sp11alnfinal90seq.aln")
-args_input_srk <- c("data/multi_align_gap/SRKfinal_90seq.aln")
-args_output    <- c("output/SSI/X_Tensor/Model1_AA10_Gene10_sL10_sR10.csv")
-args_model     <- c("1")
-dim_aa         <- as.numeric(c("10")) # max 21
-dim_gene_x2    <- as.numeric(c("10")) # max 180
-dim_site_L     <- as.numeric(c("10")) # max 99
-dim_site_R     <- as.numeric(c("10")) # max 108
-dim_site_LR    <- dim_site_L + dim_site_R # max 207
+# args_input_sp  <- c("data/multi_align_gap/sp11alnfinal90seq.aln")
+# args_input_srk <- c("data/multi_align_gap/SRKfinal_90seq.aln")
+# args_output    <- c("output/SSI/X_Tensor/Model1_AA10_Gene10_sL10_sR10.csv")
+# args_model     <- c("1")
+# dim_aa         <- as.numeric(c("10")) # max 21
+# dim_gene_x2    <- as.numeric(c("10")) # max 180
+# dim_site_L     <- as.numeric(c("10")) # max 99
+# dim_site_R     <- as.numeric(c("10")) # max 108
+# dim_site_LR    <- dim_site_L + dim_site_R # max 207
 
 #### args max####
 # model1  # model2  # model3  # model4
