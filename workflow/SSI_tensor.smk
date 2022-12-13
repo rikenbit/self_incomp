@@ -1,41 +1,46 @@
 # SSI_tensor
 ###################################################
-# No. of Clusters
-N_CLUSTERS = list(map(str, range(2, 21)))
-# N_CLUSTERS = ["3"]
-
 # Distance Data
-dist_data = ["EUCL","SBD_abs"]
-# dist_data = ["SBD_abs"]
+model = ["1","2","3","4"]
 
-# data time range
-time_range = ["stimAfter"]
+# aminoacid patterm
+aminoacid = ["10"] # max 21
 
-# ReClustering method
-ReClustering_method = ["CSPA","OINDSCAL","MCMIHOOI"]
-# ReClustering_method = ["CSPA"]
+# n_gene patterm
+# n_gene = ["5","10","50","100"]
+n_gene = ["10"] # max 180
+
+# site_ligand patterm
+# site_ligand = ["5","10","50","100"]
+site_ligand = ["10"]
+
+# site_receptor patterm
+# site_receptor = ["5","10","50","100"]
+site_receptor = ["10"]
 
 rule all:
     input:
-        expand('output/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.RData',
-            range=time_range,
-            dist=dist_data,
-            N_cls=N_CLUSTERS,
-            Re_cls=ReClustering_method
+        expand('output/SSI/X_Tensor/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.csv',
+            MOD=model,
+            AA=aminoacid,
+            GE=n_gene,
+            sL=site_ligand,
+            sR=site_receptor
             )
-        
+
 rule SSI_tensor:
     input:
-        Mem_matrix = 'output/WTS4/normalize_1/{range}/{dist}/Membership/k_Number_{N_cls}.RData'
+        sp = 'data/multi_align_gap/sp11alnfinal90seq.aln',
+        srk = 'data/multi_align_gap/SRKfinal_90seq.aln'
     output:
-        m_data = 'output/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.RData'
+        'output/SSI/X_Tensor/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.csv'
     benchmark:
-        'benchmarks/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.txt'
+        'benchmarks/SSI/X_Tensor/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.txt'
     container:
-        "docker://docker_images"
+        "docker://yamaken37/ssi_tensor:20221212"
     resources:
         mem_gb=200
     log:
-        'logs/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.log'
+        'logs/SSI/X_Tensor/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.log'
     shell:
-        'src/SSI_tensor.sh {wildcards.Re_cls} {input.Mem_matrix} {output.m_data}>& {log}'
+        'src/SSI_tensor.sh {input.sp} {input.srk} {output} {wildcards.MOD} {wildcards.AA} {wildcards.GE} {wildcards.sL} {wildcards.sR} >& {log}'
