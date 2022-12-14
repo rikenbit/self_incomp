@@ -1,10 +1,4 @@
 #### import####
-import os
-os.system("ls -a")
-os.system("ls -a /")
-os.system("pip list")
-os.system("conda list")
-
 import pandas as pd
 import numpy as np
 import sys
@@ -24,12 +18,6 @@ args = sys.argv
 args_input_x=args[1]
 args_input_y=args[2]
 args_output=args[3]
-
-print(args[0])
-print(args[1])
-print(args[2])
-print(args[3])
-
 #### test args####
 # args_input_x='output/SSI/X_Tensor/Model1_AA10_Gene10_sL10_sR10.csv'
 # args_input_y='output/SSI/y_r.csv'
