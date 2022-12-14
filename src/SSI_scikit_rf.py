@@ -1,4 +1,10 @@
 #### import####
+import os
+os.system("ls -a")
+os.system("ls -a /")
+os.system("pip list")
+os.system("conda list")
+
 import pandas as pd
 import numpy as np
 import sys
@@ -15,18 +21,21 @@ from sklearn.decomposition import PCA
 
 #### args setting####
 args = sys.argv
-args_input_x=args[0]
-args_input_y=args[1]
-args_output=args[2]
-# =args[]
+args_input_x=args[1]
+args_input_y=args[2]
+args_output=args[3]
+
+print(args[0])
+print(args[1])
+print(args[2])
+print(args[3])
+
 #### test args####
-args_input_x='./output/SSI/X_Tensor/Model1_AA10_Gene10_sL10_sR10.csv'
-args_input_y='./output/SSI/y_r.csv'
-args_output='./output/SSI/LOOCV_rf/model1_aa10_gene10_sL10_sR10.csv'
+# args_input_x='output/SSI/X_Tensor/Model1_AA10_Gene10_sL10_sR10.csv'
+# args_input_y='output/SSI/y_r.csv'
+# args_output='output/SSI/LOOCV_rf/model1_aa10_gene10_sL10_sR10.csv'
 
 # データ読み込み
-# x_csv = pd.read_csv("./output/SSI/x_r.csv")
-# y_csv = pd.read_csv("./output/SSI/y_r.csv")
 x_csv = pd.read_csv(args_input_x)
 y_csv = pd.read_csv(args_input_y)
 
