@@ -1,23 +1,23 @@
 # SSI_tensor
 ###################################################
 # Distance Data
-# model = ["1","2","3","4"]
-model = ["1"]
+model = ["1","2","3","4"]
+# model = ["1"]
 
 # aminoacid patterm
-aminoacid = ["9"] # max 21
+aminoacid = ["5","10"] # max 21
 
 # n_gene patterm
-# n_gene = ["5","10","50","100"]
-n_gene = ["10"] # max 180
+n_gene = ["5","10","50","100"]
+# n_gene = ["10"] # max 180
 
 # site_ligand patterm
-# site_ligand = ["5","10","50","100"]
-site_ligand = ["10"]
+site_ligand = ["5","10","50"]
+# site_ligand = ["10"] # max 99
 
 # site_receptor patterm
-# site_receptor = ["5","10","50","100"]
-site_receptor = ["10"]
+site_receptor = ["5","10","50"]
+# site_receptor = ["10"] # max 108
 
 rule all:
     input:
