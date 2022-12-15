@@ -22,3 +22,5 @@ slurm*
 *.fuse*
 *.ipynb
 logs.log
+*.bashrc
+*.cache

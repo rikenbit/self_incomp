@@ -5,10 +5,10 @@ model = ["1","2","3","4"]
 # model = ["1"]
 
 # aminoacid patterm
-aminoacid = ["5","10"] # max 21
+aminoacid = ["5","10","50"] # max 21
 
 # n_gene patterm
-n_gene = ["5","10","50","100"]
+n_gene = ["5","10","50"]
 # n_gene = ["10"] # max 180
 
 # site_ligand patterm
@@ -29,16 +29,6 @@ rule all:
             sR=site_receptor
             )
 
-# rule all:
-#     input:
-#         expand('output/SSI/X_Tensor/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.csv',
-#             MOD=model,
-#             AA=aminoacid,
-#             GE=n_gene,
-#             sL=site_ligand,
-#             sR=site_receptor
-#             )
-
 rule SSI_tensor:
     input:
         sp = 'data/multi_align_gap/sp11alnfinal90seq.aln',
@@ -55,16 +45,6 @@ rule SSI_tensor:
         'logs/SSI/X_Tensor/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.log'
     shell:
         'src/SSI_tensor.sh {input.sp} {input.srk} {output} {wildcards.MOD} {wildcards.AA} {wildcards.GE} {wildcards.sL} {wildcards.sR} >& {log}'
-
-# rule all:
-#     input:
-#         expand('output/SSI/LOOCV_rf/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.csv',
-#             MOD=model,
-#             AA=aminoacid,
-#             GE=n_gene,
-#             sL=site_ligand,
-#             sR=site_receptor
-#             )
 
 rule SSI_scikit_rf:
     input:
