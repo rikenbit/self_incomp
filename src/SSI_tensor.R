@@ -5,11 +5,13 @@ args <- commandArgs(trailingOnly = T)
 args_input_sp  <- args[1]
 args_input_srk <- args[2]
 args_output    <- args[3]
+
 args_model     <- args[4]
-dim_aa         <- as.numeric(args[5])
-dim_gene_x2    <- as.numeric(args[6])
-dim_site_L     <- as.numeric(args[7])
-dim_site_R     <- as.numeric(args[8])
+
+dim_aa         <- as.numeric(args[5]) # max 21
+dim_gene_x2    <- as.numeric(args[6]) # max 180
+dim_site_L     <- as.numeric(args[7]) # max 99
+dim_site_R     <- as.numeric(args[8]) # max 108
 dim_site_LR    <- dim_site_L + dim_site_R
 
 #### test args####

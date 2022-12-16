@@ -5,7 +5,7 @@ model = ["1","2","3","4"]
 # model = ["1"]
 
 # aminoacid patterm
-aminoacid = ["5","10","50"] # max 21
+aminoacid = ["5","10"] # max 21
 
 # n_gene patterm
 n_gene = ["5","10","50"]
