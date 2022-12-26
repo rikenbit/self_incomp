@@ -54,7 +54,7 @@ model_nrow =len(df_para) // len(U_MODELS)
 df_para_trim=df_para
 
 #### trim Model-1-A1G####
-l_bool = [True, False, False, True, True, True, True, True, True]
+l_bool = [False, False, False, True, True, True, True, True, True]
 df_para_trim.loc['Model-1-A1G', l_bool]="xx"
 #### trim Model-8-A1GLGR####
 l_bool = [False, True, False, True, True, False, False, True, True]
