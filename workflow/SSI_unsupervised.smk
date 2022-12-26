@@ -6,7 +6,7 @@ import pandas as pd
 from snakemake.utils import min_version
 from snakemake.utils import Paramspace
 
-min_version("6.5.3")
+# min_version("6.5.3")
 container: 'docker://koki/tensor-projects-self-incompatible:20221217'
 
 # U_MODELS = [
@@ -24,8 +24,6 @@ container: 'docker://koki/tensor-projects-self-incompatible:20221217'
 #     'Model-PCA']
 
 U_MODELS = ['Model-1-A1G', 'Model-8-A1GLGR']
-# Supervised Models
-# S_MODELS = ['Model-LDA', 'Model-PCALDA', 'Model-2DLDA']
 
 # gene LRpair patterm
 r1 = ["5","10"]
@@ -34,46 +32,49 @@ r2 = ["10","50"]
 # aminoacid patterm
 r3 =  ["5","10"]
 # gene_pair_L
-r1_L = ["5","10"]
+r1L = ["5","10"]
 # gene_pair_R
-r1_R = ["5","10"]
+r1R = ["5","10"]
 # site_ligand_L
-r2_L = ["10","50"]
+r2L = ["10","50"]
 # site_ligand_R
-r2_R = ["10","50"]
+r2R = ["10","50"]
 # aminoacid L
-r3_L =  ["5","10"]
+r3L =  ["5","10"]
 # aminoacid R
-r3_R =  ["5","10"]
+r3R =  ["5","10"]
 
 
 #### paramspace########################################################################################
-comb_para = list(it.product(U_MODELS, r1, r2, r3, r1_L, r1_R, r2_L, r2_R, r3_L, r3_R))
+comb_para = list(it.product(U_MODELS, r1, r2, r3, r1L, r1R, r2L, r2R, r3L, r3R))
 df_para = pd.DataFrame(comb_para)
 df_para = df_para.set_index(0)
-df_para = df_para.set_axis(['r1', 'r2', 'r3', 'r1_L', 'r1_R', 'r2_L', 'r2_R', 'r3_L', 'r3_R'], axis=1)
+df_para = df_para.set_axis(['r1', 'r2', 'r3', 'r1L', 'r1R', 'r2L', 'r2R', 'r3L', 'r3R'], axis=1)
 model_nrow =len(df_para) // len(U_MODELS)
 df_para_trim=df_para
 
 #### trim Model-1-A1G####
 l_bool = [True, False, False, True, True, True, True, True, True]
-df_para_trim.loc['Model-1-A1G', l_bool]="xxx"
+df_para_trim.loc['Model-1-A1G', l_bool]="xx"
 #### trim Model-8-A1GLGR####
 l_bool = [False, True, False, True, True, False, False, True, True]
-df_para_trim.loc['Model-8-A1GLGR', l_bool]="xxx"
+df_para_trim.loc['Model-8-A1GLGR', l_bool]="xx"
 #### trim Model-11-A1A4####
 # l_bool = [True, True, True, False, False, False, False, False, False]
-# df_para_trim.loc['Model-11-A1A4', l_bool]="xxx"
+# df_para_trim.loc['Model-11-A1A4', l_bool]="xx"
 ########################
 
 df_test=df_para_trim[~df_para_trim.duplicated()]
-paramspace = Paramspace(df_test, filename_params=['U_MODELS', 'r1', 'r2', 'r3', 'r1_L', 'r1_R', 'r2_L', 'r2_R', 'r3_L', 'r3_R'], param_sep="_")
+df_test.index.name = 'MODELS'
+df_test.reset_index(inplace=True)
+
+paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r1L', 'r1R', 'r2L', 'r2R', 'r3L', 'r3R'], param_sep="_")
 ############################################################################################################
 
 rule all:
     input:
-        expand('output/SSI/X_Tensor/{params}.png', params = paramspace.instance_patterns)
-
+        expand('output/X_Tensor/{params}.RData', params = paramspace.instance_patterns),
+        expand('output/X_Tensor/{params}.csv', params = paramspace.instance_patterns)
 rule preprocess:
     input:
         'data/multi_align_gap/sp11alnfinal90seq.aln',
@@ -98,16 +99,16 @@ rule u_models:
         expand('output/X_Tensor/{params}.RData', params = paramspace.wildcard_pattern),
         expand('output/X_Tensor/{params}.csv', params = paramspace.wildcard_pattern)
     params:
-        args0 = lambda w: w["U_MODELS"],
+        args0 = lambda w: w["MODELS"],
         args1 = lambda w: w["r1"],
         args2 = lambda w: w["r2"],
         args3 = lambda w: w["r3"],
-        args4 = lambda w: w["r1_L"],
-        args5 = lambda w: w["r1_R"],
-        args6 = lambda w: w["r2_L"],
-        args7 = lambda w: w["r2_R"],
-        args8 = lambda w: w["r3_L"],
-        args9 = lambda w: w["r3_R"]
+        args4 = lambda w: w["r1L"],
+        args5 = lambda w: w["r1R"],
+        args6 = lambda w: w["r2L"],
+        args7 = lambda w: w["r2R"],
+        args8 = lambda w: w["r3L"],
+        args9 = lambda w: w["r3R"]
     benchmark:
         f'benchmarks/X_Tensor/{paramspace.wildcard_pattern}.txt'
     resources:
