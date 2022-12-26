@@ -26,23 +26,23 @@ container: 'docker://koki/tensor-projects-self-incompatible:20221217'
 U_MODELS = ['Model-1-A1G', 'Model-8-A1GLGR']
 
 # gene LRpair patterm
-r1 = ["5","10"]
+r1 = ["30","60"]
 # siteLR patterm
-r2 = ["10","50"]
+r2 = ["30","60"]
 # aminoacid patterm
-r3 =  ["5","10"]
+r3 =  ["10","20"]
 # gene_pair_L
-r1L = ["5","10"]
+r1L = ["30","60"]
 # gene_pair_R
-r1R = ["5","10"]
+r1R = ["30","60"]
 # site_ligand_L
-r2L = ["10","50"]
+r2L = ["15","30"]
 # site_ligand_R
-r2R = ["10","50"]
+r2R = ["15","30"]
 # aminoacid L
-r3L =  ["5","10"]
+r3L =  ["10","20"]
 # aminoacid R
-r3R =  ["5","10"]
+r3R =  ["10","20"]
 
 
 #### paramspace########################################################################################
