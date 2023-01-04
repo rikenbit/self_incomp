@@ -10,11 +10,11 @@ outfile2 <- args[3]
 load(infile)
 
 # Parameter
-r1 <- 3
-r2 <- 4
-r3 <- 5
-r4 <- 6
-r5 <- 7
+r1 <- as.numeric(args[4]) #r1
+r2 <- as.numeric(args[9]) #r2L
+r3 <- as.numeric(args[11]) #r3L
+r4 <- as.numeric(args[10]) #r2R
+r5 <- as.numeric(args[12]) #r3R
 
 params <- new("CoupledMWCAParams",
     # Data-wise setting

@@ -33,7 +33,7 @@ library(tidyverse)
 # #### cbind####
 # df_one_loocv <- merge(cv_df, cv_value)
 # ###################for文#####################
-
+# 参考 https://bioscryptome.t-ohashi.info/r/vector/#奇数番目の要素
 .df_onerow  = function(i) {
   #### colnames from ファイル名####
   # cv_filename <- cv_filenames[i]
