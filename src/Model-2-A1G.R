@@ -43,4 +43,4 @@ X <- rs_unfold(as.tensor(tmp), m=1)@data
 
 # Save
 save(res, file=outfile1)
-write.csv(X, file=outfile2)
+write.csv(X, file=outfile2, row.names = FALSE)

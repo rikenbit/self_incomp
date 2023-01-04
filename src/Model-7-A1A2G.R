@@ -41,4 +41,4 @@ X <- rs_unfold(res@common_cores[[1]], m=1)@data
 
 # Save
 save(res, file=outfile1)
-write.csv(X, file=outfile2)
+write.csv(X, file=outfile2, row.names = FALSE)

@@ -47,4 +47,4 @@ X <- cbind(t(res@common_factors$A1), t(res@common_factors$A4))
 
 # Save
 save(res, file=outfile1)
-write.csv(X, file=outfile2)
+write.csv(X, file=outfile2, row.names = FALSE)

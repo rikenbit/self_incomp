@@ -22,4 +22,4 @@ df_loocv |>
   dplyr::mutate(All_Tensor_Params=str_remove(cv_filenames,".csv"), .before=1) -> df_loocv
 #### save####
 # Export X for Python
-write.csv(df_loocv, args_output)
+write.csv(df_loocv, args_output, row.names = FALSE)
