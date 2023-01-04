@@ -75,7 +75,7 @@ l_bool = [False, True, False, True, True, True, True, True, True]
 df_para_trim.loc['Model-3-A1G', l_bool]="xx"
 ########################
 #### trim Model-3-A1####
-l_bool = [True, True, True, True, True, True, True, True, True]
+l_bool = [False, True, False, True, True, True, True, True, True]
 df_para_trim.loc['Model-3-A1', l_bool]="xx"
 ########################
 #### trim Model-4-A1G####
