@@ -49,7 +49,7 @@ comb_para = list(it.product(U_MODELS, r1, r2, r3, r1L, r1R, r2L, r2R, r3L, r3R))
 df_para = pd.DataFrame(comb_para)
 df_para = df_para.set_index(0)
 df_para = df_para.set_axis(['r1', 'r2', 'r3', 'r1L', 'r1R', 'r2L', 'r2R', 'r3L', 'r3R'], axis=1)
-model_nrow =len(df_para) // len(U_MODELS)
+# model_nrow =len(df_para) // len(U_MODELS)
 df_para_trim=df_para
 ####################
 
@@ -86,11 +86,11 @@ df_para_trim.loc['Model-4-A1G', l_bool]="xx"
 l_bool = [False, False, True, True, True, True, True, True, True]
 df_para_trim.loc['Model-4-A1', l_bool]="xx"
 ########################
-### trim Model-5-A1####
+#### trim Model-5-A1####
 l_bool = [False, True, True, True, True, True, True, True, True]
 df_para_trim.loc['Model-5-A1', l_bool]="xx"
 #######################
-### trim Model-6-A1A3G####
+#### trim Model-6-A1A3G####
 l_bool = [True, False, True, True, True, True, True, True, True]
 df_para_trim.loc['Model-6-A1A3G', l_bool]="xx"
 #######################
@@ -122,11 +122,11 @@ df_para_trim.loc['Model-10-A1', l_bool]="xx"
 l_bool = [True, True, True, False, False, False, False, False, False]
 df_para_trim.loc['Model-11-A1A4GLGR', l_bool]="xx"
 ########################
-### trim Model-11-A1A4####
+#### trim Model-11-A1A4####
 l_bool = [True, True, True, False, False, False, False, False, False]
 df_para_trim.loc['Model-11-A1A4', l_bool]="xx"
 #######################
-### trim Model-PCA####
+#### trim Model-PCA####
 l_bool = [True, True, False, True, True, True, True, True, True]
 df_para_trim.loc['Model-PCA', l_bool]="xx"
 #######################
@@ -135,9 +135,11 @@ df_para_trim.loc['Model-PCA', l_bool]="xx"
 # df_para_trim.loc['MM', l_bool]="xx"
 ########################
 
-df_test=df_para_trim[~df_para_trim.duplicated()]
-df_test.index.name = 'MODELS'
-df_test.reset_index(inplace=True)
+df=df_para_trim
+df.index.name = 'MODELS'
+df.reset_index(inplace=True)
+df_test=df[~df.duplicated()]
+
 paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r1L', 'r1R', 'r2L', 'r2R', 'r3L', 'r3R'], param_sep="_")
 ############################################################################################################
 
