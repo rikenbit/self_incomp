@@ -25,48 +25,48 @@ U_MODELS = [
     'Model-PCA']
 
 # gene LRpair patterm
-r1 = ["40"]
+r1 = ["4","8","10","20","50","100"]
 # siteLR patterm
-r2 = ["40"]
+r2 = ["4","8","10","20","50","100"]
 # aminoacid patterm
-r3 =  ["20"]
+r3 =  ["2","3","4","5","10","20"]
 # gene_pair_L
-r1L = ["20"]
+r1L = ["4","8","10","20","50","100"]
 # gene_pair_R
-r1R = ["20"]
+r1R = ["4","8","10","20","50","100"]
 # site_ligand_L
-r2L = ["20"]
+r2L = ["2","4","5","10","25","50"]
 # site_ligand_R
-r2R = ["20"]
+r2R = ["2","4","5","10","25","50"]
 # aminoacid L
-r3L =  ["10"]
+r3L =  ["2","3","4","5","10","20"]
 # aminoacid R
-r3R =  ["10"]
-# # gene LRpair patterm
-# r1 = ["10","40"]
+r3R =  ["2","3","4","5","10","20"]
+# gene LRpair patterm
+# r1 = ["40"]
 # # siteLR patterm
-# r2 = ["10","40"]
+# r2 = ["40"]
 # # aminoacid patterm
-# r3 =  ["10","20"]
+# r3 =  ["20"]
 # # gene_pair_L
-# r1L = ["5","20"]
+# r1L = ["20"]
 # # gene_pair_R
-# r1R = ["5","20"]
+# r1R = ["20"]
 # # site_ligand_L
-# r2L = ["5","20"]
+# r2L = ["20"]
 # # site_ligand_R
-# r2R = ["5","20"]
+# r2R = ["20"]
 # # aminoacid L
-# r3L =  ["5","10"]
+# r3L =  ["10"]
 # # aminoacid R
-# r3R =  ["5","10"]
+# r3R =  ["10"]
+
 
 #### paramspace####
 comb_para = list(it.product(U_MODELS, r1, r2, r3, r1L, r1R, r2L, r2R, r3L, r3R))
 df_para = pd.DataFrame(comb_para)
 df_para = df_para.set_index(0)
 df_para = df_para.set_axis(['r1', 'r2', 'r3', 'r1L', 'r1R', 'r2L', 'r2R', 'r3L', 'r3R'], axis=1)
-# model_nrow =len(df_para) // len(U_MODELS)
 df_para_trim=df_para
 ####################
 
