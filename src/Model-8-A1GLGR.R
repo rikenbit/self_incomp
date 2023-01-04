@@ -48,4 +48,4 @@ X <- cbind(rs_unfold(as.tensor(tmp1), m=1)@data, rs_unfold(as.tensor(tmp2), m=1)
 
 # Save
 save(res, file=outfile1)
-write.csv(X, file=outfile2)
+write.csv(X, file=outfile2, row.names = FALSE)

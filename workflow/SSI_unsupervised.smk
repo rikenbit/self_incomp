@@ -7,23 +7,23 @@ from snakemake.utils import min_version
 from snakemake.utils import Paramspace
 
 # min_version("6.5.3")
-container: 'docker://koki/tensor-projects-self-incompatible:20221217'
+# container: 'docker://koki/tensor-projects-self-incompatible:20221217'
 
 # MODEL pattern
-U_MODELS = [
-    'Model-1-A1G', 'Model-1-A1',
-    'Model-2-A1G',
-    'Model-3-A1G', 'Model-3-A1',
-    'Model-4-A1G', 'Model-4-A1',
-    'Model-5-A1',
-    'Model-6-A1A3G',
-    'Model-7-A1A2G',
-    'Model-8-A1GLGR', 'Model-8-A1',
-    'Model-9-A1A4GLGR', 'Model-9-A1A4',
-    'Model-10-A1GLGR', 'Model-10-A1',
-    'Model-11-A1A4GLGR', 'Model-11-A1A4',
-    'Model-PCA']
-# U_MODELS = ['Model-1-A1G', 'Model-8-A1GLGR']
+# U_MODELS = [
+#     'Model-1-A1G', 'Model-1-A1',
+#     'Model-2-A1G',
+#     'Model-3-A1G', 'Model-3-A1',
+#     'Model-4-A1G', 'Model-4-A1',
+#     'Model-5-A1',
+#     'Model-6-A1A3G',
+#     'Model-7-A1A2G',
+#     'Model-8-A1GLGR', 'Model-8-A1',
+#     'Model-9-A1A4GLGR', 'Model-9-A1A4',
+#     'Model-10-A1GLGR', 'Model-10-A1',
+#     'Model-11-A1A4GLGR', 'Model-11-A1A4',
+#     'Model-PCA']
+U_MODELS = ['Model-1-A1G', 'Model-8-A1GLGR']
 
 # gene LRpair patterm
 r1 = ["10","40"]
@@ -62,74 +62,75 @@ l_bool = [False, True, False, True, True, False, False, True, True]
 df_para_trim.loc['Model-8-A1GLGR', l_bool]="xx"
 ########################
 
-#### trim Model-1-A1####
-l_bool = [False, False, False, True, True, True, True, True, True]
-df_para_trim.loc['Model-1-A1', l_bool]="xx"
-########################
-#### trim Model-2-A1G####
-l_bool = [True, False, False, True, True, True, True, True, True]
-df_para_trim.loc['Model-2-A1G', l_bool]="xx"
-########################
-#### trim Model-3-A1G####
-l_bool = [False, True, False, True, True, True, True, True, True]
-df_para_trim.loc['Model-3-A1G', l_bool]="xx"
-########################
-#### trim Model-3-A1####
-l_bool = [False, True, False, True, True, True, True, True, True]
-df_para_trim.loc['Model-3-A1', l_bool]="xx"
-########################
-#### trim Model-4-A1G####
-l_bool = [False, False, True, True, True, True, True, True, True]
-df_para_trim.loc['Model-4-A1G', l_bool]="xx"
-########################
-#### trim Model-4-A1####
-l_bool = [False, False, True, True, True, True, True, True, True]
-df_para_trim.loc['Model-4-A1', l_bool]="xx"
-########################
-#### trim Model-5-A1####
-l_bool = [False, True, True, True, True, True, True, True, True]
-df_para_trim.loc['Model-5-A1', l_bool]="xx"
-#######################
-#### trim Model-6-A1A3G####
-l_bool = [True, False, True, True, True, True, True, True, True]
-df_para_trim.loc['Model-6-A1A3G', l_bool]="xx"
-#######################
-#### trim Model-7-A1A2G####
-l_bool = [True, True, False, True, True, True, True, True, True]
-df_para_trim.loc['Model-7-A1A2G', l_bool]="xx"
-########################
-#### trim Model-8-A1####
-l_bool = [False, True, False, True, True, False, False, True, True]
-df_para_trim.loc['Model-8-A1', l_bool]="xx"
-########################
-#### trim Model-9-A1A4GLGR####
-l_bool = [True, True, False, False, False, False, False, True, True]
-df_para_trim.loc['Model-9-A1A4GLGR', l_bool]="xx"
-########################
-#### trim Model-9-A1A4####
-l_bool = [True, True, False, False, False, False, False, True, True]
-df_para_trim.loc['Model-9-A1A4', l_bool]="xx"
-########################
-#### trim Model-10-A1GLGR####
-l_bool = [False, True, True, True, True, False, False, False, False]
-df_para_trim.loc['Model-10-A1GLGR', l_bool]="xx"
-########################
-#### trim Model-10-A1####
-l_bool = [False, True, True, True, True, False, False, False, False]
-df_para_trim.loc['Model-10-A1', l_bool]="xx"
-########################
-#### trim Model-11-A1A4GLGR####
-l_bool = [True, True, True, False, False, False, False, False, False]
-df_para_trim.loc['Model-11-A1A4GLGR', l_bool]="xx"
-########################
-#### trim Model-11-A1A4####
-l_bool = [True, True, True, False, False, False, False, False, False]
-df_para_trim.loc['Model-11-A1A4', l_bool]="xx"
-#######################
-#### trim Model-PCA####
-l_bool = [True, False, True, True, True, True, True, True, True]
-df_para_trim.loc['Model-PCA', l_bool]="xx"
-#######################
+# #### trim Model-1-A1####
+# l_bool = [False, False, False, True, True, True, True, True, True]
+# df_para_trim.loc['Model-1-A1', l_bool]="xx"
+# ########################
+# #### trim Model-2-A1G####
+# l_bool = [True, False, False, True, True, True, True, True, True]
+# df_para_trim.loc['Model-2-A1G', l_bool]="xx"
+# ########################
+# #### trim Model-3-A1G####
+# l_bool = [False, True, False, True, True, True, True, True, True]
+# df_para_trim.loc['Model-3-A1G', l_bool]="xx"
+# ########################
+# #### trim Model-3-A1####
+# l_bool = [False, True, False, True, True, True, True, True, True]
+# df_para_trim.loc['Model-3-A1', l_bool]="xx"
+# ########################
+# #### trim Model-4-A1G####
+# l_bool = [False, False, True, True, True, True, True, True, True]
+# df_para_trim.loc['Model-4-A1G', l_bool]="xx"
+# ########################
+# #### trim Model-4-A1####
+# l_bool = [False, False, True, True, True, True, True, True, True]
+# df_para_trim.loc['Model-4-A1', l_bool]="xx"
+# ########################
+# #### trim Model-5-A1####
+# l_bool = [False, True, True, True, True, True, True, True, True]
+# df_para_trim.loc['Model-5-A1', l_bool]="xx"
+# #######################
+# #### trim Model-6-A1A3G####
+# l_bool = [True, False, True, True, True, True, True, True, True]
+# df_para_trim.loc['Model-6-A1A3G', l_bool]="xx"
+# #######################
+# #### trim Model-7-A1A2G####
+# l_bool = [True, True, False, True, True, True, True, True, True]
+# df_para_trim.loc['Model-7-A1A2G', l_bool]="xx"
+# ########################
+# #### trim Model-8-A1####
+# l_bool = [False, True, False, True, True, False, False, True, True]
+# df_para_trim.loc['Model-8-A1', l_bool]="xx"
+# ########################
+# #### trim Model-9-A1A4GLGR####
+# l_bool = [True, True, False, False, False, False, False, True, True]
+# df_para_trim.loc['Model-9-A1A4GLGR', l_bool]="xx"
+# ########################
+# #### trim Model-9-A1A4####
+# l_bool = [True, True, False, False, False, False, False, True, True]
+# df_para_trim.loc['Model-9-A1A4', l_bool]="xx"
+# ########################
+# #### trim Model-10-A1GLGR####
+# l_bool = [False, True, True, True, True, False, False, False, False]
+# df_para_trim.loc['Model-10-A1GLGR', l_bool]="xx"
+# ########################
+# #### trim Model-10-A1####
+# l_bool = [False, True, True, True, True, False, False, False, False]
+# df_para_trim.loc['Model-10-A1', l_bool]="xx"
+# ########################
+# #### trim Model-11-A1A4GLGR####
+# l_bool = [True, True, True, False, False, False, False, False, False]
+# df_para_trim.loc['Model-11-A1A4GLGR', l_bool]="xx"
+# ########################
+# #### trim Model-11-A1A4####
+# l_bool = [True, True, True, False, False, False, False, False, False]
+# df_para_trim.loc['Model-11-A1A4', l_bool]="xx"
+# #######################
+# #### trim Model-PCA####
+# l_bool = [True, False, True, True, True, True, True, True, True]
+# df_para_trim.loc['Model-PCA', l_bool]="xx"
+# #######################
+
 #### trim MM####
 # l_bool = [True, True, True, True, True, True, True, True, True]
 # df_para_trim.loc['MM', l_bool]="xx"
@@ -145,8 +146,10 @@ paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r
 
 rule all:
     input:
-        expand('output/X_Tensor/{params}.RData', params = paramspace.instance_patterns),
-        expand('output/X_Tensor/{params}.csv', params = paramspace.instance_patterns)
+        # expand('output/X_Tensor/{params}.RData', params = paramspace.instance_patterns),
+        # expand('output/X_Tensor/{params}.csv', params = paramspace.instance_patterns)
+        expand('output/LOOCV_rf/{params}.csv', params = paramspace.instance_patterns)
+
 rule preprocess:
     input:
         'data/multi_align_gap/sp11alnfinal90seq.aln',
@@ -157,6 +160,8 @@ rule preprocess:
         mem_gb=50
     benchmark:
         'benchmarks/preprocess.txt'
+    container:
+        'docker://koki/tensor-projects-self-incompatible:20221217'
     log:
         'logs/preprocess.log'
     shell:
@@ -181,6 +186,8 @@ rule u_models:
         args9 = lambda w: w["r3R"]
     benchmark:
         f'benchmarks/X_Tensor/{paramspace.wildcard_pattern}.txt'
+    container:
+        'docker://koki/tensor-projects-self-incompatible:20221217'
     resources:
         mem_gb=200
     log:
@@ -213,19 +220,24 @@ rule u_models:
 #     shell:
 #         'src/SSI_unsupervised.sh {wildcards.Re_cls} {input.Mem_matrix} {output.m_data}>& {log}'
 
-# rule SSI_scikit_rf:
-#     input:
-#         x = 'output/SSI/X_Tensor/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.csv',
-#         y = 'output/SSI/y_r.csv'
-#     output:
-#         'output/SSI/LOOCV_rf/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.csv'
-#     benchmark:
-#         'benchmarks/SSI/LOOCV_rf/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.txt'
-#     container:
-#         "docker://yamaken37/ssi_sklearn_env:202212141249"
-#     resources:
-#         mem_gb=200
-#     log:
-#         'logs/SSI/LOOCV_rf/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.log'
-#     shell:
-#         'source .bashrc && conda activate sklearn-env && python src/SSI_scikit_rf.py {input.x} {input.y} {output} >& {log}'
+rule SSI_scikit_rf:
+    input:
+        # x = 'output/SSI/X_Tensor/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.csv',
+        # y = 'output/SSI/y_r.csv'
+        expand('output/X_Tensor/{params}.csv', params = paramspace.wildcard_pattern),
+        'output/SSI/y_r.csv'
+    output:
+        # 'output/SSI/LOOCV_rf/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.csv'
+        expand('output/LOOCV_rf/{params}.csv', params = paramspace.wildcard_pattern)
+    benchmark:
+        # 'benchmarks/SSI/LOOCV_rf/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.txt'
+        f'benchmarks/LOOCV_rf/{paramspace.wildcard_pattern}.txt'
+    container:
+        "docker://yamaken37/ssi_sklearn_env:202212141249"
+    resources:
+        mem_gb=200
+    log:
+        # 'logs/SSI/LOOCV_rf/Model{MOD}_AA{AA}_Gene{GE}_sL{sL}_sR{sR}.log'
+        f'logs/LOOCV_rf/{paramspace.wildcard_pattern}.log'
+    shell:
+        'source .bashrc && conda activate sklearn-env && python src/SSI_scikit_rf.py {input} {output} >& {log}'
