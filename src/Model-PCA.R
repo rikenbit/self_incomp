@@ -10,7 +10,7 @@ outfile2 <- args[3]
 load(infile)
 
 # Parameter
-r <- as.numeric(args[6]) #r3
+r <- as.numeric(args[5]) #r2
 
 # Reshape
 data <- rs_unfold(as.tensor(LRTensor), m=1)@data
