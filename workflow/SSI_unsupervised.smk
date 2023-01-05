@@ -176,7 +176,8 @@ paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r
 
 rule all:
     input:
-        expand('output/LOOCV_rf/{params}.csv', params = paramspace.instance_patterns)
+        # expand('output/LOOCV_rf/{params}.csv', params = paramspace.instance_patterns)
+        expand('output/Vis_Pairplot/{params}.png', params = paramspace.instance_patterns)
 
 rule preprocess:
     input:
@@ -239,3 +240,20 @@ rule SSI_scikit_rf:
         f'logs/LOOCV_rf/{paramspace.wildcard_pattern}.log'
     shell:
         'source .bashrc && conda activate sklearn-env && python src/SSI_scikit_rf.py {input} {output} >& {log}'
+
+rule SSI_Vis_Pairplot:
+    input:
+        expand('output/X_Tensor/{params}.csv', params = paramspace.wildcard_pattern),
+        'output/SSI/y_r.csv'
+    output:
+        expand('output/Vis_Pairplot/{params}.png', params = paramspace.wildcard_pattern)
+    benchmark:
+        f'benchmarks/Vis_Pairplot/{paramspace.wildcard_pattern}.txt'
+    container:
+        "docker://yamaken37/mcmi_pairs:20220309"
+    resources:
+        mem_gb=200
+    log:
+        f'logs/Vis_Pairplot/{paramspace.wildcard_pattern}.log'
+    shell:
+        'src/SSI_Vis_Pairplot.sh {input} {output} >& {log}'
