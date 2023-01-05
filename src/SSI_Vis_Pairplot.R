@@ -24,7 +24,7 @@ X_df |>
 
 #### ggpairs####
 Xy_df |> 
-    ggpairs(columns = 1:ncol(X),
+    ggpairs(columns = 1:ncol(X_csv),
             aes_string(color="y", alpha=0.5),
             upper = list(continuous="points"),
             legend = 1
