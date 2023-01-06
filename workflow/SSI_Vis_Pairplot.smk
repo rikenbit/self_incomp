@@ -1,41 +1,40 @@
+import pandas as pd
+
 # SSI_Vis_Pairplot
 ###################################################
-# No. of Clusters
-N_CLUSTERS = list(map(str, range(2, 21)))
-# N_CLUSTERS = ["3"]
+# df = pd.read_csv('output/Tensor_viz/X_Tensor_LOOCV_rf.csv')
+# list_LOOCV = df['All_Tensor_Params'].to_list()
 
-# Distance Data
-dist_data = ["EUCL","SBD_abs"]
-# dist_data = ["SBD_abs"]
-
-# data time range
-time_range = ["stimAfter"]
-
-# ReClustering method
-ReClustering_method = ["CSPA","OINDSCAL","MCMIHOOI"]
-# ReClustering_method = ["CSPA"]
+# top10
+list_LOOCV = [
+    'MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_20_r3R_20',
+    'MODELS_Model-9-A1A4_r1_xx_r2_xx_r3_20_r1L_100_r1R_100_r2L_50_r2R_50_r3L_xx_r3R_xx',
+    'MODELS_Model-8-A1GLGR_r1_10_r2_xx_r3_20_r1L_xx_r1R_xx_r2L_25_r2R_25_r3L_xx_r3R_xx',
+    'MODELS_Model-10-A1GLGR_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_25_r3L_20_r3R_20',
+    'MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_25_r3L_5_r3R_5',
+    'MODELS_Model-11-A1A4_r1_xx_r2_xx_r3_xx_r1L_100_r1R_100_r2L_25_r2R_50_r3L_10_r3R_10',
+    'MODELS_Model-8-A1_r1_10_r2_xx_r3_20_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_xx_r3R_xx',
+    'MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_50_r3L_20_r3R_10',
+    'MODELS_Model-10-A1GLGR_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_10_r3R_20',
+    'MODELS_Model-10-A1GLGR_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_50_r3L_5_r3R_5']
 
 rule all:
     input:
-        expand('output/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.RData',
-            range=time_range,
-            dist=dist_data,
-            N_cls=N_CLUSTERS,
-            Re_cls=ReClustering_method
-            )
-        
+        expand('output/Vis_Pairplot/{list_l}.png',list_l=list_LOOCV)
+
 rule SSI_Vis_Pairplot:
     input:
-        Mem_matrix = 'output/WTS4/normalize_1/{range}/{dist}/Membership/k_Number_{N_cls}.RData'
+        'output/X_Tensor/{list_l}.csv',
+        'output/SSI/y_r.csv'
     output:
-        m_data = 'output/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.RData'
+        'output/Vis_Pairplot/{list_l}.png'
     benchmark:
-        'benchmarks/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.txt'
+        'benchmarks/Vis_Pairplot/{list_l}.txt'
     container:
-        "docker://docker_images"
+        'docker://yamaken37/mcmi_pairs:20220309'
     resources:
         mem_gb=200
     log:
-        'logs/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.log'
+        'logs/Vis_Pairplot/{list_l}.log'
     shell:
-        'src/SSI_Vis_Pairplot.sh {wildcards.Re_cls} {input.Mem_matrix} {output.m_data}>& {log}'
+        'src/SSI_Vis_Pairplot.sh {input} {output} >& {log}'

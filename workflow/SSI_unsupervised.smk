@@ -176,8 +176,7 @@ paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r
 
 rule all:
     input:
-        # expand('output/LOOCV_rf/{params}.csv', params = paramspace.instance_patterns)
-        expand('output/Vis_Pairplot/{params}.png', params = paramspace.instance_patterns)
+        expand('output/LOOCV_rf/{params}.csv', params = paramspace.instance_patterns)
 
 rule preprocess:
     input:
@@ -224,36 +223,19 @@ rule u_models:
     shell:
         'src/{params.args0}.sh {input} {output} {params.args1} {params.args2} {params.args3} {params.args4} {params.args5} {params.args6} {params.args7} {params.args8} {params.args9} >& {log}'
 
-# rule SSI_scikit_rf:
-#     input:
-#         expand('output/X_Tensor/{params}.csv', params = paramspace.wildcard_pattern),
-#         'output/SSI/y_r.csv'
-#     output:
-#         expand('output/LOOCV_rf/{params}.csv', params = paramspace.wildcard_pattern)
-#     benchmark:
-#         f'benchmarks/LOOCV_rf/{paramspace.wildcard_pattern}.txt'
-#     container:
-#         "docker://yamaken37/ssi_sklearn_env:202212141249"
-#     resources:
-#         mem_gb=200
-#     log:
-#         f'logs/LOOCV_rf/{paramspace.wildcard_pattern}.log'
-#     shell:
-#         'source .bashrc && conda activate sklearn-env && python src/SSI_scikit_rf.py {input} {output} >& {log}'
-
-rule SSI_Vis_Pairplot:
+rule SSI_scikit_rf:
     input:
         expand('output/X_Tensor/{params}.csv', params = paramspace.wildcard_pattern),
         'output/SSI/y_r.csv'
     output:
-        expand('output/Vis_Pairplot/{params}.png', params = paramspace.wildcard_pattern)
+        expand('output/LOOCV_rf/{params}.csv', params = paramspace.wildcard_pattern)
     benchmark:
-        f'benchmarks/Vis_Pairplot/{paramspace.wildcard_pattern}.txt'
+        f'benchmarks/LOOCV_rf/{paramspace.wildcard_pattern}.txt'
     container:
-        "docker://yamaken37/mcmi_pairs:20220309"
+        "docker://yamaken37/ssi_sklearn_env:202212141249"
     resources:
         mem_gb=200
     log:
-        f'logs/Vis_Pairplot/{paramspace.wildcard_pattern}.log'
+        f'logs/LOOCV_rf/{paramspace.wildcard_pattern}.log'
     shell:
-        'src/SSI_Vis_Pairplot.sh {input} {output} >& {log}'
+        'source .bashrc && conda activate sklearn-env && python src/SSI_scikit_rf.py {input} {output} >& {log}'
