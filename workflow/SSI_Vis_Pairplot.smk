@@ -20,14 +20,16 @@ list_LOOCV = [
 
 rule all:
     input:
-        expand('output/Vis_Pairplot/{list_l}.png',list_l=list_LOOCV)
+        expand('output/Vis_Pairplot/{list_l}.png',list_l=list_LOOCV),
+        expand('output/Vis_Umap/{list_l}.png',list_l=list_LOOCV)
 
 rule SSI_Vis_Pairplot:
     input:
         'output/X_Tensor/{list_l}.csv',
         'output/SSI/y_r.csv'
     output:
-        'output/Vis_Pairplot/{list_l}.png'
+        'output/Vis_Pairplot/{list_l}.png',
+        'output/Vis_Umap/{list_l}.png'
     benchmark:
         'benchmarks/Vis_Pairplot/{list_l}.txt'
     container:
