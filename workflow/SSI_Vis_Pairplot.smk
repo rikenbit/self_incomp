@@ -33,7 +33,7 @@ rule SSI_Vis_Pairplot:
     benchmark:
         'benchmarks/Vis_Pairplot/{list_l}.txt'
     container:
-        'docker://yamaken37/mcmi_pairs:20220309'
+        'docker://yamaken37/ssi_vis_pairplot:20230106'
     resources:
         mem_gb=200
     log:

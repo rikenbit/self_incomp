@@ -13,8 +13,9 @@ args_output_umap <- args[4]
 # args_output <- c("output/Vis_Pairplot/MODELS_Model-9-A1A4_r1_xx_r2_xx_r3_20_r1L_100_r1R_100_r2L_50_r2R_50_r3L_xx_r3R_xx.png")
 # args_output_umap <- c("output/Vis_Umap/MODELS_Model-9-A1A4_r1_xx_r2_xx_r3_20_r1L_100_r1R_100_r2L_50_r2R_50_r3L_xx_r3R_xx.png")
 #### create dataframe of Xy ####
-X_csv <- read_csv(args_input_x)
-X_df <- as.data.frame(X_csv)
+args_input_x |> 
+    read_csv() |> 
+        as.data.frame() -> X_df
 #### filter dim15####
 if(ncol(X_df) <= 15) {
     n_dim <- ncol(X_df)
@@ -23,10 +24,15 @@ if(ncol(X_df) <= 15) {
 }
 X_df <- X_df[,1:n_dim]
 ####
-colnames(X_df) <- str_replace(colnames(X_df), 'V', 'col')
-read_csv(args_input_y, col_names ="y",skip =1) -> y_csv
-as.character(as.vector(y_csv)$y) -> y
-X_df |> mutate(y) -> Xy_df
+colnames(X_df) <- str_replace(colnames(X_df), 
+                              'V', 
+                              'col')
+y_csv <- read_csv(args_input_y, 
+                  col_names ="y",
+                  skip =1)
+y <- as.character(as.vector(y_csv)$y)
+X_df |> 
+    mutate(y) -> Xy_df
 
 #### ggpairs####
 Xy_df |>
@@ -47,10 +53,12 @@ ggsave(filename = args_output,
 #### umap ggplot####
 set.seed(1234)
 X_umap <- umap::umap(X_df)$layout
-X_umap$layout |> 
+X_umap |> 
     as.data.frame() |> 
         mutate(y) -> umap_df
-colnames(umap_df) <- c("cord_1","cord_2","y")
+colnames(umap_df) <- c("cord_1",
+                       "cord_2",
+                       "y")
 
 gg_umap <- ggplot(umap_df,
                   aes(x = cord_1,
@@ -58,8 +66,8 @@ gg_umap <- ggplot(umap_df,
                       color = y
                       )
                   ) +
-  geom_point(size = 6.0,alpha = 0.6) +
-  theme(text = element_text(size = 60))
+    geom_point(size = 6.0, alpha = 0.6) +
+    theme(text = element_text(size = 60))
 
 ggsave(filename = args_output_umap,
        plot = gg_umap,
