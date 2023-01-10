@@ -27,7 +27,7 @@ df_loocv |>
 # ℹ Please use `after_stat(count)` instead.
 # https://mukkujohn.hatenablog.com/entry/2016/09/17/142036
 cord_x <- c("Accuracy")
-cord_y <- c("density")
+cord_y <- c("density (scaled)")
 ggplot_title <- c("Density plot:Accuracy")
 new_order <- c("Model-1-A1G",
                "Model-1-A1",
@@ -62,7 +62,6 @@ gg_acc <- ggplot(df_loocv,
        title = ggplot_title
        ) +
   scale_x_continuous(breaks = seq(0, 1, 0.2), limits = c(0, 1)) +
-  xlim(c(0, 1)) +
   ylim(c(0, 2)) +
   theme(plot.title = element_text(hjust = 0.5)) +
   theme(text = element_text(size = 90)) +
@@ -77,8 +76,8 @@ ggsave(filename = args_output,
 
 #### ggplot density facet_wrap ####
 cord_x <- c("Accuracy")
-cord_y <- c("density(y_scale free)")
-ggplot_title <- c("Density plot：Accuracy (each Model)")
+cord_y <- c("density (y_scale free)")
+ggplot_title <- c("Density plot:Accuracy  (each Model)")
 new_order <- c("Model-1-A1G",
                "Model-1-A1",
                "Model-2-A1G",
@@ -115,9 +114,7 @@ gg_acc_fw <- ggplot(df_loocv,
     facet_wrap(~factor(MODELS, levels=new_order),
                ncol = 4,
                scales = "free")
-# facet_wrap(~ MODELS,
-#            ncol=4,
-#            scales = "free")
+
 ggsave(filename = args_output_fw, 
        plot = gg_acc_fw,
        dpi = 50, 

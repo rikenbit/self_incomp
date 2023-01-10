@@ -6,8 +6,8 @@ library(tidyverse)
     cv_filenames[i] |>
         strsplit("_") |>
             unlist() -> cv_col_vec
-    cv_col_vec[seq(1,length(cv_col_vec),2)] -> cv_colnames
-    cv_col_vec[seq(2,length(cv_col_vec),2)] -> cv_params
+    cv_col_vec[seq(1, length(cv_col_vec), 2)] -> cv_colnames
+    cv_col_vec[seq(2, length(cv_col_vec), 2)] -> cv_params
     #### dataframe parametor####
     rbind(cv_colnames, cv_params) |>
       as.data.frame(col.names = cv_colnames,
@@ -19,7 +19,6 @@ library(tidyverse)
     cv_value <- read_csv(cv_dirname, col_names = "Loocv")
     #### cbind####
     df_one_loocv <- merge(cv_df, cv_value)
-    
-    df_one_loocv-> return_object
+    return_object <- df_one_loocv
     return(return_object)
 }
