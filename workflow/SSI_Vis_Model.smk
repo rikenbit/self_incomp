@@ -3,7 +3,9 @@
 rule all:
     input:
         'output/Vis_Model/Acc_Dens_plot.png',
-        'output/Vis_Model/Acc_Dens_plot_FW.png'
+        'output/Vis_Model/Acc_Dens_plot_FW.png',
+        'output/Vis_Model/Dim_X_plot.png',
+        'output/Vis_Model/Num_Para_plot.png'
 
 rule SSI_Vis_Model:
     # input:
@@ -11,7 +13,9 @@ rule SSI_Vis_Model:
     #     'output/SSI/y_r.csv'
     output:
         'output/Vis_Model/Acc_Dens_plot.png',
-        'output/Vis_Model/Acc_Dens_plot_FW.png'
+        'output/Vis_Model/Acc_Dens_plot_FW.png',
+        'output/Vis_Model/Dim_X_plot.png',
+        'output/Vis_Model/Num_Para_plot.png'
     params:
         input_dir = 'output/LOOCV_rf'
     benchmark:
