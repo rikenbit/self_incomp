@@ -121,3 +121,6 @@ ggsave(filename = args_output_fw,
        width = 65.0, 
        height = 50.0,
        limitsize = FALSE)
+
+#### ggplot Dimention of X ####
+nrow(df_loocv) |> purrr::map(, .mutate_dim_x) -> dim_x

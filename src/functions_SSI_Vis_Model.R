@@ -4,8 +4,9 @@ library(tidyverse)
 ##################################################
 .df_onerow  = function(i) {
     cv_filenames[i] |>
-        strsplit("_") |>
-            unlist() -> cv_col_vec
+      str_remove(".csv") |> 
+          strsplit("_") |>
+              unlist() -> cv_col_vec
     cv_col_vec[seq(1, length(cv_col_vec), 2)] -> cv_colnames
     cv_col_vec[seq(2, length(cv_col_vec), 2)] -> cv_params
     #### dataframe parametor####
@@ -22,3 +23,11 @@ library(tidyverse)
     return_object <- df_one_loocv
     return(return_object)
 }
+
+.mutate_dim_x = function(i) {}
+
+cv_filenames[i] |>
+  strsplit("_") |>
+  unlist() |> 
+  strsplit(".")
+  

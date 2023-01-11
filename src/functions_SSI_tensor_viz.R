@@ -44,8 +44,9 @@ library(tidyverse)
   #   str_extract_all("[:alpha:]+") |>
   #   unlist() -> cv_colnames
   cv_filenames[i] |>
-      strsplit("_") |>
-          unlist() -> cv_col_vec
+      str_remove(".csv") |>
+          strsplit("_") |>
+              unlist() -> cv_col_vec
       cv_col_vec[seq(1,length(cv_col_vec),2)] -> cv_colnames
   #### parametor from ファイル名####
   # cv_filename |>
