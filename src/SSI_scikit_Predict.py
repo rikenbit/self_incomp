@@ -1,16 +1,14 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 #### import####
 import pandas as pd
 import numpy as np
 import sys
-#ランダムフォレスト
 from sklearn.ensemble import RandomForestClassifier
-#ホールドアウトのimport
 from sklearn.model_selection import train_test_split
-#交差検証のimport
 from sklearn.model_selection import cross_val_score
-#LeaveOneOutのimport
 from sklearn.model_selection import LeaveOneOut
-# PCA
 from sklearn.decomposition import PCA
 
 #### args setting####
@@ -34,11 +32,6 @@ X = x_csv.values
 
 # ランダムフォレスト
 clf = RandomForestClassifier(random_state=1234, n_estimators=1000)
-
-# # モデル学習
-# clf.fit(X,y)
-# # 予測値
-# clf.predict(X)
 
 # LeaveOneOutの作成
 loocv = LeaveOneOut()
