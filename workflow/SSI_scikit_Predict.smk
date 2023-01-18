@@ -2,19 +2,19 @@ import pandas as pd
 # SSI_scikit_Predict
 ###################################################
 # top10
-# list_LOOCV = [
-#     'MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_20_r3R_20',
-#     'MODELS_Model-9-A1A4_r1_xx_r2_xx_r3_20_r1L_100_r1R_100_r2L_50_r2R_50_r3L_xx_r3R_xx',
-#     'MODELS_Model-8-A1GLGR_r1_10_r2_xx_r3_20_r1L_xx_r1R_xx_r2L_25_r2R_25_r3L_xx_r3R_xx',
-#     'MODELS_Model-10-A1GLGR_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_25_r3L_20_r3R_20',
-#     'MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_25_r3L_5_r3R_5',
-#     'MODELS_Model-11-A1A4_r1_xx_r2_xx_r3_xx_r1L_100_r1R_100_r2L_25_r2R_50_r3L_10_r3R_10',
-#     'MODELS_Model-8-A1_r1_10_r2_xx_r3_20_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_xx_r3R_xx',
-#     'MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_50_r3L_20_r3R_10',
-#     'MODELS_Model-10-A1GLGR_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_10_r3R_20',
-#     'MODELS_Model-10-A1GLGR_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_50_r3L_5_r3R_5']
+list_LOOCV = [
+    'MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_20_r3R_20',
+    'MODELS_Model-9-A1A4_r1_xx_r2_xx_r3_20_r1L_100_r1R_100_r2L_50_r2R_50_r3L_xx_r3R_xx',
+    'MODELS_Model-8-A1GLGR_r1_10_r2_xx_r3_20_r1L_xx_r1R_xx_r2L_25_r2R_25_r3L_xx_r3R_xx',
+    'MODELS_Model-10-A1GLGR_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_25_r3L_20_r3R_20',
+    'MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_25_r3L_5_r3R_5',
+    'MODELS_Model-11-A1A4_r1_xx_r2_xx_r3_xx_r1L_100_r1R_100_r2L_25_r2R_50_r3L_10_r3R_10',
+    'MODELS_Model-8-A1_r1_10_r2_xx_r3_20_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_xx_r3R_xx',
+    'MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_50_r3L_20_r3R_10',
+    'MODELS_Model-10-A1GLGR_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_10_r3R_20',
+    'MODELS_Model-10-A1GLGR_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_50_r3L_5_r3R_5']
 
-list_LOOCV = ['MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_20_r3R_20']
+# list_LOOCV = ['MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_20_r3R_20']
 
 rule all:
     input:
