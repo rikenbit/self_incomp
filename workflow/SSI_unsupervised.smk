@@ -25,7 +25,7 @@ U_MODELS = [
     'Model-PCA']
 # U_MODELS = ['Model-1-A1G']
 
-# # gene LRpair patterm
+# # gene LRpair 3patterm
 # # 4574job/5406→2073条件で、12時間かかった
 # r1 = ["10","50","100"]
 # # siteLR patterm
