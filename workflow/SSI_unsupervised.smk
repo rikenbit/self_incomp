@@ -24,42 +24,45 @@ U_MODELS = [
     'Model-11-A1A4GLGR', 'Model-11-A1A4',
     'Model-PCA']
 
-# gene LRpair patterm
-r1 = ["10","50","100"]
-# siteLR patterm
-r2 = ["10","50","100"]
-# aminoacid patterm
-r3 =  ["5","10","20"]
-# gene_pair_L
-r1L = ["10","50","100"]
-# gene_pair_R
-r1R = ["10","50","100"]
-# site_ligand_L
-r2L = ["5","25","50"]
-# site_ligand_R
-r2R = ["5","25","50"]
-# aminoacid L
-r3L =  ["5","10","20"]
-# aminoacid R
-r3R =  ["5","10","20"]
 # # gene LRpair patterm
-# r1 = ["4","8","10","20","50","100"]
+# # 4574job/5406→2073条件で、12時間かかった
+# r1 = ["10","50","100"]
 # # siteLR patterm
-# r2 = ["4","8","10","20","50","100"]
+# r2 = ["10","50","100"]
 # # aminoacid patterm
-# r3 =  ["2","3","4","5","10","20"]
+# r3 =  ["5","10","20"]
 # # gene_pair_L
-# r1L = ["4","8","10","20","50","100"]
+# r1L = ["10","50","100"]
 # # gene_pair_R
-# r1R = ["4","8","10","20","50","100"]
+# r1R = ["10","50","100"]
 # # site_ligand_L
-# r2L = ["2","4","5","10","25","50"]
+# r2L = ["5","25","50"]
 # # site_ligand_R
-# r2R = ["2","4","5","10","25","50"]
+# r2R = ["5","25","50"]
 # # aminoacid L
-# r3L =  ["2","3","4","5","10","20"]
+# r3L =  ["5","10","20"]
 # # aminoacid R
-# r3R =  ["2","3","4","5","10","20"]
+# r3R =  ["5","10","20"]
+
+# gene LRpair patterm
+r1 = ["4","8","10","20","50","100"]
+# siteLR patterm
+r2 = ["4","8","10","20","50","100"]
+# aminoacid patterm
+r3 =  ["2","3","4","5","10","20"]
+# gene_pair_L
+r1L = ["4","8","10","20","50","100"]
+# gene_pair_R
+r1R = ["4","8","10","20","50","100"]
+# site_ligand_L
+r2L = ["2","4","5","10","25","50"]
+# site_ligand_R
+r2R = ["2","4","5","10","25","50"]
+# aminoacid L
+r3L =  ["2","3","4","5","10","20"]
+# aminoacid R
+r3R =  ["2","3","4","5","10","20"]
+
 # gene LRpair patterm
 # r1 = ["40"]
 # # siteLR patterm
@@ -176,7 +179,8 @@ paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r
 
 rule all:
     input:
-        expand('output/LOOCV_rf/{params}.csv', params = paramspace.instance_patterns)
+        expand('output/LOOCV_rf/{params}.csv', params = paramspace.instance_patterns),
+        expand('output/y_score/{params}.csv', params = paramspace.instance_patterns)
 
 rule preprocess:
     input:
@@ -228,7 +232,8 @@ rule SSI_scikit_rf:
         expand('output/X_Tensor/{params}.csv', params = paramspace.wildcard_pattern),
         'output/SSI/y_r.csv'
     output:
-        expand('output/LOOCV_rf/{params}.csv', params = paramspace.wildcard_pattern)
+        expand('output/LOOCV_rf/{params}.csv', params = paramspace.wildcard_pattern),
+        expand('output/y_score/{params}.csv', params = paramspace.wildcard_pattern)
     benchmark:
         f'benchmarks/LOOCV_rf/{paramspace.wildcard_pattern}.txt'
     container:
