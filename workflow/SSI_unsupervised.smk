@@ -10,19 +10,20 @@ from snakemake.utils import Paramspace
 # container: 'docker://koki/tensor-projects-self-incompatible:20221217'
 
 # MODEL pattern
-U_MODELS = [
-    'Model-1-A1G', 'Model-1-A1',
-    'Model-2-A1G',
-    'Model-3-A1G', 'Model-3-A1',
-    'Model-4-A1G', 'Model-4-A1',
-    'Model-5-A1',
-    'Model-6-A1A3G',
-    'Model-7-A1A2G',
-    'Model-8-A1GLGR', 'Model-8-A1',
-    'Model-9-A1A4GLGR', 'Model-9-A1A4',
-    'Model-10-A1GLGR', 'Model-10-A1',
-    'Model-11-A1A4GLGR', 'Model-11-A1A4',
-    'Model-PCA']
+# U_MODELS = [
+#     'Model-1-A1G', 'Model-1-A1',
+#     'Model-2-A1G',
+#     'Model-3-A1G', 'Model-3-A1',
+#     'Model-4-A1G', 'Model-4-A1',
+#     'Model-5-A1',
+#     'Model-6-A1A3G',
+#     'Model-7-A1A2G',
+#     'Model-8-A1GLGR', 'Model-8-A1',
+#     'Model-9-A1A4GLGR', 'Model-9-A1A4',
+#     'Model-10-A1GLGR', 'Model-10-A1',
+#     'Model-11-A1A4GLGR', 'Model-11-A1A4',
+#     'Model-PCA']
+U_MODELS = ['Model-1-A1G']
 
 # # gene LRpair patterm
 # # 4574job/5406→2073条件で、12時間かかった
@@ -44,43 +45,43 @@ U_MODELS = [
 # # aminoacid R
 # r3R =  ["5","10","20"]
 
-# gene LRpair patterm
-r1 = ["4","8","10","20","50","100"]
-# siteLR patterm
-r2 = ["4","8","10","20","50","100"]
-# aminoacid patterm
-r3 =  ["2","3","4","5","10","20"]
-# gene_pair_L
-r1L = ["4","8","10","20","50","100"]
-# gene_pair_R
-r1R = ["4","8","10","20","50","100"]
-# site_ligand_L
-r2L = ["2","4","5","10","25","50"]
-# site_ligand_R
-r2R = ["2","4","5","10","25","50"]
-# aminoacid L
-r3L =  ["2","3","4","5","10","20"]
-# aminoacid R
-r3R =  ["2","3","4","5","10","20"]
-
-# gene LRpair patterm
-# r1 = ["40"]
+# # gene LRpair 6patterm
+# r1 = ["4","8","10","20","50","100"]
 # # siteLR patterm
-# r2 = ["40"]
+# r2 = ["4","8","10","20","50","100"]
 # # aminoacid patterm
-# r3 =  ["20"]
+# r3 =  ["3","4","5","8","10","20"]
 # # gene_pair_L
-# r1L = ["20"]
+# r1L = ["4","8","10","20","50","100"]
 # # gene_pair_R
-# r1R = ["20"]
+# r1R = ["4","8","10","20","50","100"]
 # # site_ligand_L
-# r2L = ["20"]
+# r2L = ["2","4","5","10","25","50"]
 # # site_ligand_R
-# r2R = ["20"]
+# r2R = ["2","4","5","10","25","50"]
 # # aminoacid L
-# r3L =  ["10"]
+# r3L =  ["3","4","5","8","10","20"]
 # # aminoacid R
-# r3R =  ["10"]
+# r3R =  ["3","4","5","8","10","20"]
+
+# gene LRpair 6patterm test
+r1 = ["4"]
+# siteLR patterm
+r2 = ["4"]
+# aminoacid patterm
+r3 =  ["3"]
+# gene_pair_L
+r1L = ["4"]
+# gene_pair_R
+r1R = ["4"]
+# site_ligand_L
+r2L = ["2"]
+# site_ligand_R
+r2R = ["2"]
+# aminoacid L
+r3L =  ["3"]
+# aminoacid R
+r3R =  ["3"]
 
 
 #### paramspace####
@@ -95,79 +96,79 @@ df_para_trim=df_para
 l_bool = [False, False, False, True, True, True, True, True, True]
 df_para_trim.loc['Model-1-A1G', l_bool]="xx"
 ########################
-#### trim Model-8-A1GLGR####
-l_bool = [False, True, False, True, True, False, False, True, True]
-df_para_trim.loc['Model-8-A1GLGR', l_bool]="xx"
-########################
+# #### trim Model-8-A1GLGR####
+# l_bool = [False, True, False, True, True, False, False, True, True]
+# df_para_trim.loc['Model-8-A1GLGR', l_bool]="xx"
+# ########################
 
-#### trim Model-1-A1####
-l_bool = [False, False, False, True, True, True, True, True, True]
-df_para_trim.loc['Model-1-A1', l_bool]="xx"
-########################
-#### trim Model-2-A1G####
-l_bool = [True, False, False, True, True, True, True, True, True]
-df_para_trim.loc['Model-2-A1G', l_bool]="xx"
-########################
-#### trim Model-3-A1G####
-l_bool = [False, True, False, True, True, True, True, True, True]
-df_para_trim.loc['Model-3-A1G', l_bool]="xx"
-########################
-#### trim Model-3-A1####
-l_bool = [False, True, False, True, True, True, True, True, True]
-df_para_trim.loc['Model-3-A1', l_bool]="xx"
-########################
-#### trim Model-4-A1G####
-l_bool = [False, False, True, True, True, True, True, True, True]
-df_para_trim.loc['Model-4-A1G', l_bool]="xx"
-########################
-#### trim Model-4-A1####
-l_bool = [False, False, True, True, True, True, True, True, True]
-df_para_trim.loc['Model-4-A1', l_bool]="xx"
-########################
-#### trim Model-5-A1####
-l_bool = [False, True, True, True, True, True, True, True, True]
-df_para_trim.loc['Model-5-A1', l_bool]="xx"
-#######################
-#### trim Model-6-A1A3G####
-l_bool = [True, False, True, True, True, True, True, True, True]
-df_para_trim.loc['Model-6-A1A3G', l_bool]="xx"
-#######################
-#### trim Model-7-A1A2G####
-l_bool = [True, True, False, True, True, True, True, True, True]
-df_para_trim.loc['Model-7-A1A2G', l_bool]="xx"
-########################
-#### trim Model-8-A1####
-l_bool = [False, True, False, True, True, False, False, True, True]
-df_para_trim.loc['Model-8-A1', l_bool]="xx"
-########################
-#### trim Model-9-A1A4GLGR####
-l_bool = [True, True, False, False, False, False, False, True, True]
-df_para_trim.loc['Model-9-A1A4GLGR', l_bool]="xx"
-########################
-#### trim Model-9-A1A4####
-l_bool = [True, True, False, False, False, False, False, True, True]
-df_para_trim.loc['Model-9-A1A4', l_bool]="xx"
-########################
-#### trim Model-10-A1GLGR####
-l_bool = [False, True, True, True, True, False, False, False, False]
-df_para_trim.loc['Model-10-A1GLGR', l_bool]="xx"
-########################
-#### trim Model-10-A1####
-l_bool = [False, True, True, True, True, False, False, False, False]
-df_para_trim.loc['Model-10-A1', l_bool]="xx"
-########################
-#### trim Model-11-A1A4GLGR####
-l_bool = [True, True, True, False, False, False, False, False, False]
-df_para_trim.loc['Model-11-A1A4GLGR', l_bool]="xx"
-########################
-#### trim Model-11-A1A4####
-l_bool = [True, True, True, False, False, False, False, False, False]
-df_para_trim.loc['Model-11-A1A4', l_bool]="xx"
-#######################
-#### trim Model-PCA####
-l_bool = [True, False, True, True, True, True, True, True, True]
-df_para_trim.loc['Model-PCA', l_bool]="xx"
-#######################
+# #### trim Model-1-A1####
+# l_bool = [False, False, False, True, True, True, True, True, True]
+# df_para_trim.loc['Model-1-A1', l_bool]="xx"
+# ########################
+# #### trim Model-2-A1G####
+# l_bool = [True, False, False, True, True, True, True, True, True]
+# df_para_trim.loc['Model-2-A1G', l_bool]="xx"
+# ########################
+# #### trim Model-3-A1G####
+# l_bool = [False, True, False, True, True, True, True, True, True]
+# df_para_trim.loc['Model-3-A1G', l_bool]="xx"
+# ########################
+# #### trim Model-3-A1####
+# l_bool = [False, True, False, True, True, True, True, True, True]
+# df_para_trim.loc['Model-3-A1', l_bool]="xx"
+# ########################
+# #### trim Model-4-A1G####
+# l_bool = [False, False, True, True, True, True, True, True, True]
+# df_para_trim.loc['Model-4-A1G', l_bool]="xx"
+# ########################
+# #### trim Model-4-A1####
+# l_bool = [False, False, True, True, True, True, True, True, True]
+# df_para_trim.loc['Model-4-A1', l_bool]="xx"
+# ########################
+# #### trim Model-5-A1####
+# l_bool = [False, True, True, True, True, True, True, True, True]
+# df_para_trim.loc['Model-5-A1', l_bool]="xx"
+# #######################
+# #### trim Model-6-A1A3G####
+# l_bool = [True, False, True, True, True, True, True, True, True]
+# df_para_trim.loc['Model-6-A1A3G', l_bool]="xx"
+# #######################
+# #### trim Model-7-A1A2G####
+# l_bool = [True, True, False, True, True, True, True, True, True]
+# df_para_trim.loc['Model-7-A1A2G', l_bool]="xx"
+# ########################
+# #### trim Model-8-A1####
+# l_bool = [False, True, False, True, True, False, False, True, True]
+# df_para_trim.loc['Model-8-A1', l_bool]="xx"
+# ########################
+# #### trim Model-9-A1A4GLGR####
+# l_bool = [True, True, False, False, False, False, False, True, True]
+# df_para_trim.loc['Model-9-A1A4GLGR', l_bool]="xx"
+# ########################
+# #### trim Model-9-A1A4####
+# l_bool = [True, True, False, False, False, False, False, True, True]
+# df_para_trim.loc['Model-9-A1A4', l_bool]="xx"
+# ########################
+# #### trim Model-10-A1GLGR####
+# l_bool = [False, True, True, True, True, False, False, False, False]
+# df_para_trim.loc['Model-10-A1GLGR', l_bool]="xx"
+# ########################
+# #### trim Model-10-A1####
+# l_bool = [False, True, True, True, True, False, False, False, False]
+# df_para_trim.loc['Model-10-A1', l_bool]="xx"
+# ########################
+# #### trim Model-11-A1A4GLGR####
+# l_bool = [True, True, True, False, False, False, False, False, False]
+# df_para_trim.loc['Model-11-A1A4GLGR', l_bool]="xx"
+# ########################
+# #### trim Model-11-A1A4####
+# l_bool = [True, True, True, False, False, False, False, False, False]
+# df_para_trim.loc['Model-11-A1A4', l_bool]="xx"
+# #######################
+# #### trim Model-PCA####
+# l_bool = [True, False, True, True, True, True, True, True, True]
+# df_para_trim.loc['Model-PCA', l_bool]="xx"
+# #######################
 
 df=df_para_trim
 df.index.name = 'MODELS'
