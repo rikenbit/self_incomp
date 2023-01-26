@@ -10,15 +10,16 @@ source("src/functions_SSI_tensor_viz.R")
 # args_output    <- c("output/SSI/Tensor_viz/X_Tensor_LOOCV_rf.csv")
 
 # args_input_dir  <- c("output/LOOCV_rf")
-args_input_dir  <- c("output/LOOCV_rf_copy")
+# args_input_dir  <- c("output/LOOCV_rf_copy")
+args_input_dir  <- c("output/LOOCV_rf_230124")
 
 # args_output    <- c("output/Tensor_viz/X_Tensor_LOOCV_rf.csv")
-# args_output    <- c("output/Tensor_viz/19Umodel_4para/X_Tensor_LOOCV_rf.csv")
-args_output    <- c("output/Tensor_viz/19Umodel_5para_copy/X_Tensor_LOOCV_rf.csv")
+# args_output    <- c("output/Tensor_viz/19Umodel_5para_copy/X_Tensor_LOOCV_rf.csv")
+args_output    <- c("output/Tensor_viz/19Umodel_4para/X_Tensor_LOOCV_rf.csv")
 
-#### ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªä¸€è¦§å–å¾—####
+#### ¥Ç¥£¥ì¥¯¥È¥êÒ»ÓEÈ¡µÃ####
 cv_dirnames <- list.files(args_input_dir, full.names = TRUE)
-#### ãƒ•ã‚¡ã‚¤ãƒ«åä¸€è¦§å–å¾—####
+#### ¥Õ¥¡¥¤¥ëÃûÒ»ÓEÈ¡µÃ####
 cv_filenames <- list.files(args_input_dir, full.names = FALSE)
 
 #### create dataframe####
