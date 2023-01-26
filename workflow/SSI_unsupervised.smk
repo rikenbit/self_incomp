@@ -45,25 +45,6 @@ U_MODELS = [
 # # aminoacid R
 # r3R =  ["5","10","20"]
 
-# gene LRpair 5patterm
-r1 = ["6","10","20","50","100"]
-# siteLR patterm
-r2 = ["6","10","20","50","100"]
-# aminoacid patterm
-r3 =  ["3","5","8","10","20"]
-# gene_pair_L
-r1L = ["6","10","20","50","100"]
-# gene_pair_R
-r1R = ["6","10","20","50","100"]
-# site_ligand_L
-r2L = ["3","5","10","25","50"]
-# site_ligand_R
-r2R = ["3","5","10","25","50"]
-# aminoacid L
-r3L =  ["3","5","8","10","20"]
-# aminoacid R
-r3R =  ["3","5","8","10","20"]
-
 # # gene LRpair 1patterm test
 # r1 = ["4"]
 # # siteLR patterm
@@ -82,6 +63,44 @@ r3R =  ["3","5","8","10","20"]
 # r3L =  ["3"]
 # # aminoacid R
 # r3R =  ["3"]
+
+# # gene LRpair 5patterm 20230124ストップ
+# r1 = ["6","10","20","50","100"]
+# # siteLR patterm
+# r2 = ["6","10","20","50","100"]
+# # aminoacid patterm
+# r3 =  ["3","5","8","10","20"]
+# # gene_pair_L
+# r1L = ["6","10","20","50","100"]
+# # gene_pair_R
+# r1R = ["6","10","20","50","100"]
+# # site_ligand_L
+# r2L = ["3","5","10","25","50"]
+# # site_ligand_R
+# r2R = ["3","5","10","25","50"]
+# # aminoacid L
+# r3L =  ["3","5","8","10","20"]
+# # aminoacid R
+# r3R =  ["3","5","8","10","20"]
+
+# gene LRpair 4patterm
+r1 = ["6","10","20","50"]
+# siteLR patterm
+r2 = ["10","20","50","100"]
+# aminoacid patterm
+r3 = ["5","8","10","20"]
+# gene_pair_L
+r1L = ["6","10","50","100"]
+# gene_pair_R
+r1R = ["6","10","50","100"]
+# site_ligand_L
+r2L = ["5","10","25","50"]
+# site_ligand_R
+r2R = ["5","10","25","50"]
+# aminoacid L
+r3L = ["5","8","10","20"]
+# aminoacid R
+r3R = ["5","8","10","20"]
 
 
 #### paramspace####

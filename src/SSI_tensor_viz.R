@@ -8,9 +8,13 @@ source("src/functions_SSI_tensor_viz.R")
 #### test args####
 # args_input_dir  <- c("output/SSI/LOOCV_rf")
 # args_output    <- c("output/SSI/Tensor_viz/X_Tensor_LOOCV_rf.csv")
-args_input_dir  <- c("output/LOOCV_rf")
+
+# args_input_dir  <- c("output/LOOCV_rf")
+args_input_dir  <- c("output/LOOCV_rf_copy")
+
 # args_output    <- c("output/Tensor_viz/X_Tensor_LOOCV_rf.csv")
-args_output    <- c("output/Tensor_viz/19Umodel_6para/X_Tensor_LOOCV_rf.csv")
+# args_output    <- c("output/Tensor_viz/19Umodel_4para/X_Tensor_LOOCV_rf.csv")
+args_output    <- c("output/Tensor_viz/19Umodel_5para_copy/X_Tensor_LOOCV_rf.csv")
 
 #### ディレクトリ一覧取得####
 cv_dirnames <- list.files(args_input_dir, full.names = TRUE)
