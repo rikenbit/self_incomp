@@ -2,6 +2,8 @@
 ##################################################
 library()
 ##################################################
-.func = function(x) {
-	return(return_object)
+jaccard <- function(a, b) {
+  intersection = length(intersect(a, b))
+  union = length(a) + length(b) - intersection
+  return(intersection/union)
 }
