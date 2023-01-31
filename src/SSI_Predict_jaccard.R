@@ -89,16 +89,16 @@ df_ghm$jac_x_axis <- factor(df_ghm$jac_x_axis, levels = colnames(df_jaccard)[hc.
 df_ghm$jac_y_axis <- factor(df_ghm$jac_y_axis, levels = colnames(df_jaccard)[hc.cols$order])
 
 # same model to NA
-sapply(seq(nrow(df_ghm)),
-       function(x){
-           if(df_ghm[x,1]==df_ghm[x,2]){
-               return(NA)
-           }else{
-               return(df_ghm[x,3])
-           }
-       }
-) -> new_jaccard
-df_ghm$jaccard <- new_jaccard
+# sapply(seq(nrow(df_ghm)),
+#        function(x){
+#            if(df_ghm[x,1]==df_ghm[x,2]){
+#                return(NA)
+#            }else{
+#                return(df_ghm[x,3])
+#            }
+#        }
+# ) -> new_jaccard
+# df_ghm$jaccard <- new_jaccard
 
 df_ghm |> 
     ggplot_ghm() -> ghm
