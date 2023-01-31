@@ -24,7 +24,7 @@ list_LOOCV = [
 
 rule all:
     input:
-        'output/Predict_jaccard/u_model_heatmap.svg'
+        'output/Predict_jaccard/u_model_heatmap_dendrogram.svg'
 
 rule SSI_scikit_Predict_py:
     input:
@@ -47,11 +47,11 @@ rule SSI_Predict_jaccard:
     input:
         expand('output/y_score/{list_l}.csv', list_l=list_LOOCV)
     output:
-        'output/Predict_jaccard/u_model_heatmap.svg'
+        'output/Predict_jaccard/u_model_heatmap_dendrogram.svg'
     benchmark:
         'benchmarks/Predict_jaccard/u_model_heatmap.txt'
     container:
-        "docker://yamaken37/heatmap_svg:20230130"
+        "docker://yamaken37/heatmap_svg:20230131"
     resources:
         mem_gb=200
     log:
