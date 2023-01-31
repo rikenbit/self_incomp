@@ -49,12 +49,12 @@ rule SSI_Predict_jaccard:
     output:
         'output/Predict_jaccard/u_model_heatmap_dendrogram.svg'
     benchmark:
-        'benchmarks/Predict_jaccard/u_model_heatmap.txt'
+        'benchmarks/Predict_jaccard/u_model_heatmap_dendrogram.txt'
     container:
-        "docker://yamaken37/heatmap_svg:20230131"
+        "docker://yamaken37/heatmap_svg:2023013118"
     resources:
         mem_gb=200
     log:
-        'logs/Predict_jaccard/u_model_heatmap.log'
+        'logs/Predict_jaccard/u_model_heatmap_dendrogram.log'
     shell:
         'src/SSI_Predict_jaccard.sh {output} {input} >& {log}'

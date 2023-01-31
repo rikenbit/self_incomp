@@ -6,6 +6,7 @@ library(viridis)
 library(openxlsx) # read.xlsxを追加
 library(svglite) # svgでの保存できるようにする
 library(patchwork)
+library(ggdendro)
 ##################################################
 .model_u_name  = function(i) {
     args_model_u[i] |>
