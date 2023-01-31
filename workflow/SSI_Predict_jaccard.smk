@@ -24,8 +24,7 @@ list_LOOCV = [
 
 rule all:
     input:
-        # expand('output/y_predict/{list_l}.csv', list_l=list_LOOCV)
-        'output/Predict_jaccard/u_model_heatmap.png'
+        'output/Predict_jaccard/u_model_heatmap.svg'
 
 rule SSI_scikit_Predict_py:
     input:
@@ -44,28 +43,11 @@ rule SSI_scikit_Predict_py:
     shell:
         'source .bashrc && conda activate sklearn-env && python src/SSI_scikit_Predict.py {input} {output} >& {log}'
 
-# rule SSI_scikit_Predict:
-#     input:
-#         'output/SSI/y_r.csv',
-#         'output/y_score/{list_l}.csv'
-#     output:
-#         'output/y_predict/{list_l}.csv'
-#     benchmark:
-#         'benchmarks/y_predict/{list_l}.txt'
-#     container:
-#         'docker://yamaken37/ssi_vis_pairplot:20230106'
-#     resources:
-#         mem_gb=200
-#     log:
-#         'logs/y_predict/{list_l}.log'
-#     shell:
-#         'src/SSI_scikit_Predict.sh {input} {output} >& {log}'
-
 rule SSI_Predict_jaccard:
     input:
         expand('output/y_score/{list_l}.csv', list_l=list_LOOCV)
     output:
-        'output/Predict_jaccard/u_model_heatmap.png'
+        'output/Predict_jaccard/u_model_heatmap.svg'
     benchmark:
         'benchmarks/Predict_jaccard/u_model_heatmap.txt'
     container:

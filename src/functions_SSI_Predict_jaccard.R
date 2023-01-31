@@ -31,14 +31,14 @@ ggplot_ghm = function(x) {
     axis.line = element_blank(),
     axis.ticks = element_blank(),
     strip.background = element_rect(fill = "white", colour = "white"),
-    plot.title = element_text(size = 60, hjust = 0.5),
-    axis.title = element_text(size = 60),
-    axis.text.x = element_text(size = 60, angle = 90),
-    axis.text.y = element_text(size = 60),
+    plot.title = element_text(size = 40, hjust = 0.5),
+    axis.title = element_text(size = 40),
+    axis.text.x = element_text(size = 40, angle = 90),
+    axis.text.y = element_text(size = 40),
     legend.key.height = unit(2.5, "cm"),
     legend.key.width = unit(1.5, "cm"),
-    legend.text = element_text(size = 60),
-    legend.title = element_text(size = 60)
+    legend.text = element_text(size = 40),
+    legend.title = element_text(size = 40)
   )
   ghm <- ghm + scale_fill_viridis(na.value = "grey", direction = 1) # heatmap color is viridis http://www.okadajp.org/RWiki/?色見本
   ghm <- ghm + labs(x = "",
