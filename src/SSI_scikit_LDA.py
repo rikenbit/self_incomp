@@ -45,13 +45,13 @@ score = cross_val_score(clf, X, y, cv=loocv)
 
 #### SSI_scikit_Predict.py####
 # output score by csv
-args_output_y_score=args_output.replace('LOOCV_LDA', 'y_score')
+# args_output_y_score=args_output.replace('LOOCV_LDA', 'y_score')
 
-int_score = np.asarray(score, dtype = int)
-list_score =list(int_score)
+# int_score = np.asarray(score, dtype = int)
+# list_score =list(int_score)
 
-df = pd.DataFrame({'score':list_score})
-df.to_csv(args_output_y_score)
+# df = pd.DataFrame({'score':list_score})
+# df.to_csv(args_output_y_score)
 ###################
 
 # args_output

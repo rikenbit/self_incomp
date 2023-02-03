@@ -66,11 +66,11 @@ df_ghm$jac_y_axis <- factor(df_ghm$jac_y_axis, levels = colnames(df_jaccard)[hc.
 df_ghm |> 
     ggplot_ghm() -> ghm
 
-dendro_plot <- ggdendrogram(data = as.dendrogram(hc.cols))
+dendro_plot <- ggdendrogram(data = as.dendrogram(hc.cols), labels = FALSE)
 # patchwork
 gg <- dendro_plot +
     ghm + 
-    plot_layout(ncol = 1, heights = c(1, 3))
+    plot_layout(ncol = 1, heights = c(1, 4))
 
 ### ggsave####
 ggsave(filename = args_output,

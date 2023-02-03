@@ -11,11 +11,12 @@ source("src/functions_SSI_tensor_viz.R")
 
 # args_input_dir  <- c("output/LOOCV_rf")
 # args_input_dir  <- c("output/LOOCV_rf_copy")
-args_input_dir  <- c("output/LOOCV_rf_230124")
+# args_input_dir  <- c("output/LOOCV_rf_230124")
+args_input_dir  <- c("output/LOOCV_LDA")
 
 # args_output    <- c("output/Tensor_viz/X_Tensor_LOOCV_rf.csv")
 # args_output    <- c("output/Tensor_viz/19Umodel_5para_copy/X_Tensor_LOOCV_rf.csv")
-args_output    <- c("output/Tensor_viz/19Umodel_4para/X_Tensor_LOOCV_rf.csv")
+args_output    <- c("output/Tensor_viz/19Umodel_TopPara/X_Tensor_LOOCV_LDA.csv")
 
 #### ¥Ç¥£¥ì¥¯¥È¥êÒ»ÓEÈ¡µÃ####
 cv_dirnames <- list.files(args_input_dir, full.names = TRUE)
