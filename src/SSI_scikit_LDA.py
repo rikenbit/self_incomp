@@ -24,6 +24,10 @@ args_output_plot=args[4]
 # args_input_y='output/SSI/y_r.csv'
 # args_output='output/LOOCV_LDA/MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_20_r3R_20.csv'
 # args_output_plot='output/OneDim_LDA/MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_20_r3R_20.csv'
+# args_input_x='output/X_Tensor/MODELS_Model-11-A1A4_r1_xx_r2_xx_r3_xx_r1L_100_r1R_100_r2L_25_r2R_50_r3L_10_r3R_10.csv'
+# args_input_y='output/SSI/y_r.csv'
+# args_output='output/LOOCV_LDA/MODELS_Model-11-A1A4_r1_xx_r2_xx_r3_xx_r1L_100_r1R_100_r2L_25_r2R_50_r3L_10_r3R_10.csv'
+# args_output_plot='output/OneDim_LDA/MODELS_Model-11-A1A4_r1_xx_r2_xx_r3_xx_r1L_100_r1R_100_r2L_25_r2R_50_r3L_10_r3R_10.csv'
 
 # データ読み込み
 x_csv = pd.read_csv(args_input_x)
@@ -45,7 +49,7 @@ score = cross_val_score(clf, X, y, cv=loocv)
 
 #### SSI_scikit_Predict.py####
 # output score by csv
-# args_output_y_score=args_output.replace('LOOCV_LDA', 'y_score')
+# args_output_y_score=args_output.replace('LOOCV_LDA', 'LDA_y_score')
 
 # int_score = np.asarray(score, dtype = int)
 # list_score =list(int_score)
