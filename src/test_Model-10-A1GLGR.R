@@ -22,4 +22,5 @@ tmp2 <- rs_unfold(as.tensor(tmp2), m=1)
 X <- cbind(tmp1@data, tmp2@data)
 
 # Save
-write.csv(X, file=outfile)
+# write.csv(X, file=outfile)
+write.csv(X, file=outfile, row.names = FALSE)

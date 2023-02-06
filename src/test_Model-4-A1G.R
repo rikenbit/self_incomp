@@ -15,4 +15,5 @@ tmp <- einsum('ijk,lj->ilk', LRTensor, res@common_factors$A2)
 X <- rs_unfold(as.tensor(tmp), m=1)@data
 
 # Save
-write.csv(X, file=outfile)
+# write.csv(X, file=outfile)
+write.csv(X, file=outfile, row.names = FALSE)

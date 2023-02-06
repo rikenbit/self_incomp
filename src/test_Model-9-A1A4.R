@@ -22,4 +22,5 @@ tmp2 <- einsum('ijk,ljk->il', ReceptorTensor, tmp2)
 X <- cbind(tmp1, tmp2)
 
 # Save
-write.csv(X, file=outfile)
+# write.csv(X, file=outfile)
+write.csv(X, file=outfile, row.names = FALSE)

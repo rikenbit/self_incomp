@@ -14,4 +14,5 @@ load(infile2)
 X <- einsum('ijk,ljk->il', LRTensor, res@common_cores[[1]]@data)
 
 # Save
-write.csv(X, file=outfile)
+# write.csv(X, file=outfile)
+write.csv(X, file=outfile, row.names = FALSE)

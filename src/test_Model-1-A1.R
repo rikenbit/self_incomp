@@ -16,4 +16,5 @@ tmp <- einsum('ilk,km->ilm', tmp, res@common_factors$A3)
 X <- einsum('ijk,ljk->il', LRTensor, tmp)
 
 # Save
-write.csv(X, file=outfile)
+# write.csv(X, file=outfile)
+write.csv(X, file=outfile, row.names = FALSE)
