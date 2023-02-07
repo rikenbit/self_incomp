@@ -1,5 +1,6 @@
 # SSI_U_Predict
 ###################################################
+#### import####
 import itertools as it
 import numpy as np
 import pandas as pd
@@ -170,7 +171,8 @@ paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r
 rule all:
     input:
         # expand('output/FINISH_X/{params}', params = paramspace.instance_patterns)
-        expand('output/train_X/fit/{params}.pickle', params = paramspace.instance_patterns)
+        # expand('output/train_X/fit/{params}.pickle', params = paramspace.instance_patterns)
+        expand('output/test_X/predict/{params}.csv', params = paramspace.instance_patterns)
 
 rule preprocess_train:
     input:
@@ -294,3 +296,20 @@ rule SSI_scikit_rf_fit:
         f'logs/train_X/fit/{paramspace.wildcard_pattern}.log'
     shell:
         'source .bashrc && conda activate sklearn-env && python src/SSI_scikit_rf_fit.py {input} {output} >& {log}'
+
+rule SSI_U_Predict:
+    input:
+        expand('output/train_X/fit/{params}.pickle', params = paramspace.wildcard_pattern),
+        expand('output/test_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
+    output:
+        expand('output/test_X/predict/{params}.csv', params = paramspace.wildcard_pattern)
+    benchmark:
+        f'benchmarks/test_X/predict/{paramspace.wildcard_pattern}.txt'
+    container:
+        "docker://yamaken37/ssi_sklearn_env:202212141249"
+    resources:
+        mem_gb=200
+    log:
+        f'logs/test_X/predict/{paramspace.wildcard_pattern}.log'
+    shell:
+        'source .bashrc && conda activate sklearn-env && python src/SSI_U_Predict.py {input} {output} >& {log}'
