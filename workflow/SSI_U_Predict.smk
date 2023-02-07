@@ -327,7 +327,7 @@ rule SSI_U_Predict_R:
     benchmark:
         'benchmarks/test_X/SSI_U_Predict.txt'
     container:
-        "docker://yamaken37/biostrings_tidy:20230207"
+        "docker://yamaken37/biostrings_tidy:2023020717"
     resources:
         mem_gb=200
     log:

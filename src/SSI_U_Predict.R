@@ -1,17 +1,17 @@
 source("src/functions_SSI_U_Predict.R")
 
 #### args setting####
-# args <- commandArgs(trailingOnly = T)
-# args_output <- args[1]
-# args_input_dir  <- args[2]
-# args_params_L <- args[3]
-# args_params_R <- args[4]
+args <- commandArgs(trailingOnly = T)
+args_output <- args[1]
+args_input_dir  <- args[2]
+args_params_L <- args[3]
+args_params_R <- args[4]
 
 #### test args####
-args_input_dir  <- c("output/test_X/predict")
-args_output    <- c("output/test_X/SSI_U_Predict.csv")
-args_params_L <- c("data/multi_align_gap/ArabiLigand_all_final_190seq.aln")
-args_params_R <- c("data/multi_align_gap/ArabiReceptorFinal.aln")
+# args_input_dir  <- c("output/test_X/predict")
+# args_output    <- c("output/test_X/SSI_U_Predict.csv")
+# args_params_L <- c("data/multi_align_gap/ArabiLigand_all_final_190seq.aln")
+# args_params_R <- c("data/multi_align_gap/ArabiReceptorFinal.aln")
 
 # get pass
 cv_dirnames <- list.files(args_input_dir, full.names = TRUE)
