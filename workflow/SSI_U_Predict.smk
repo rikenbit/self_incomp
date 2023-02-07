@@ -172,7 +172,8 @@ rule all:
     input:
         # expand('output/FINISH_X/{params}', params = paramspace.instance_patterns)
         # expand('output/train_X/fit/{params}.pickle', params = paramspace.instance_patterns)
-        expand('output/test_X/predict/{params}.csv', params = paramspace.instance_patterns)
+        # expand('output/test_X/predict/{params}.csv', params = paramspace.instance_patterns)
+        'output/test_X/SSI_U_Predict.csv'
 
 rule preprocess_train:
     input:
@@ -313,3 +314,23 @@ rule SSI_U_Predict:
         f'logs/test_X/predict/{paramspace.wildcard_pattern}.log'
     shell:
         'source .bashrc && conda activate sklearn-env && python src/SSI_U_Predict.py {input} {output} >& {log}'
+
+rule SSI_U_Predict_R:
+    input:
+        expand('output/test_X/predict/{params}.csv', params = paramspace.instance_patterns)
+    output:
+        'output/test_X/SSI_U_Predict.csv'
+    params:
+        'output/test_X/predict',
+        'data/multi_align_gap/ArabiLigand_all_final_190seq.aln',
+        'data/multi_align_gap/ArabiReceptorFinal.aln'
+    benchmark:
+        'benchmarks/test_X/SSI_U_Predict.txt'
+    container:
+        "docker://yamaken37/biostrings_tidy:20230207"
+    resources:
+        mem_gb=200
+    log:
+        'logs/test_X/SSI_U_Predict.log'
+    shell:
+        'src/SSI_U_Predict.sh {output} {params} >& {log}'
