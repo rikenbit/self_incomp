@@ -20,4 +20,5 @@ scale.data <- scale(data, center=TRUE, scale=FALSE)
 X <- scale.data %*% res$rotation
 
 # Save
-write.csv(X, file=outfile)
+# write.csv(X, file=outfile)
+write.csv(X, file=outfile, row.names = FALSE)
