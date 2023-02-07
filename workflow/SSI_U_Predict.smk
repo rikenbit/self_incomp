@@ -9,27 +9,29 @@ from snakemake.utils import Paramspace
 ####################################paramspace dataframe##########################################################
 # Setting dataframe by BEST Hyper Parameter
 ####################
+# list_LOOCV = [
+# 'MODELS_Model-1-A1_r1_20_r2_100_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-1-A1G_r1_10_r2_20_r3_10_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-2-A1G_r1_xx_r2_10_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-3-A1_r1_10_r2_xx_r3_8_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-3-A1G_r1_10_r2_xx_r3_20_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-4-A1_r1_20_r2_100_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-4-A1G_r1_6_r2_50_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-5-A1_r1_20_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-6-A1A3G_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-7-A1A2G_r1_xx_r2_xx_r3_8_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-8-A1_r1_20_r2_xx_r3_8_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_xx_r3R_xx',
+# 'MODELS_Model-8-A1GLGR_r1_6_r2_xx_r3_10_r1L_xx_r1R_xx_r2L_25_r2R_25_r3L_xx_r3R_xx',
+# 'MODELS_Model-9-A1A4_r1_xx_r2_xx_r3_20_r1L_100_r1R_100_r2L_50_r2R_50_r3L_xx_r3R_xx',
+# 'MODELS_Model-9-A1A4GLGR_r1_xx_r2_xx_r3_20_r1L_6_r1R_6_r2L_25_r2R_25_r3L_xx_r3R_xx',
+# 'MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_20_r3R_20',
+# 'MODELS_Model-10-A1GLGR_r1_6_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_50_r3L_20_r3R_10',
+# 'MODELS_Model-11-A1A4_r1_xx_r2_xx_r3_xx_r1L_100_r1R_100_r2L_25_r2R_50_r3L_10_r3R_10',
+# 'MODELS_Model-11-A1A4GLGR_r1_xx_r2_xx_r3_xx_r1L_6_r1R_6_r2L_25_r2R_25_r3L_8_r3R_8',
+# 'MODELS_Model-PCA_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx'
+# ]
 list_LOOCV = [
-'MODELS_Model-1-A1_r1_20_r2_100_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-1-A1G_r1_10_r2_20_r3_10_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-2-A1G_r1_xx_r2_10_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-3-A1_r1_10_r2_xx_r3_8_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-3-A1G_r1_10_r2_xx_r3_20_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-4-A1_r1_20_r2_100_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-4-A1G_r1_6_r2_50_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-5-A1_r1_20_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-6-A1A3G_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-7-A1A2G_r1_xx_r2_xx_r3_8_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-8-A1_r1_20_r2_xx_r3_8_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_xx_r3R_xx',
-'MODELS_Model-8-A1GLGR_r1_6_r2_xx_r3_10_r1L_xx_r1R_xx_r2L_25_r2R_25_r3L_xx_r3R_xx',
-'MODELS_Model-9-A1A4_r1_xx_r2_xx_r3_20_r1L_100_r1R_100_r2L_50_r2R_50_r3L_xx_r3R_xx',
-'MODELS_Model-9-A1A4GLGR_r1_xx_r2_xx_r3_20_r1L_6_r1R_6_r2L_25_r2R_25_r3L_xx_r3R_xx',
-'MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_20_r3R_20',
-'MODELS_Model-10-A1GLGR_r1_6_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_50_r3L_20_r3R_10',
-'MODELS_Model-11-A1A4_r1_xx_r2_xx_r3_xx_r1L_100_r1R_100_r2L_25_r2R_50_r3L_10_r3R_10',
-'MODELS_Model-11-A1A4GLGR_r1_xx_r2_xx_r3_xx_r1L_6_r1R_6_r2L_25_r2R_25_r3L_8_r3R_8',
-'MODELS_Model-PCA_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx'
-]
+'MODELS_Model-1-A1G_r1_10_r2_20_r3_10_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx']
 
 df_Series= pd.Series(list_LOOCV)
 df = df_Series.str.split('_', expand=True)
@@ -167,7 +169,8 @@ paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r
 
 rule all:
     input:
-        expand('output/FINISH_X/{params}', params = paramspace.instance_patterns)
+        # expand('output/FINISH_X/{params}', params = paramspace.instance_patterns)
+        expand('output/train_X/fit/{params}.pickle', params = paramspace.instance_patterns)
 
 rule preprocess_train:
     input:
@@ -207,8 +210,8 @@ rule train_u_models:
     input:
         'data/train_Tensors.RData'
     output:
-        expand('output/train_X/{params}.RData', params = paramspace.wildcard_pattern),
-        expand('output/train_X/{params}.csv', params = paramspace.wildcard_pattern)
+        expand('output/train_X/tensor/{params}.RData', params = paramspace.wildcard_pattern),
+        expand('output/train_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
     params:
         args0 = lambda w: w["MODELS"],
         args1 = lambda w: w["r1"],
@@ -221,22 +224,22 @@ rule train_u_models:
         args8 = lambda w: w["r3L"],
         args9 = lambda w: w["r3R"]
     benchmark:
-        f'benchmarks/train_X/{paramspace.wildcard_pattern}.txt'
+        f'benchmarks/train_X/tensor/{paramspace.wildcard_pattern}.txt'
     container:
         'docker://koki/tensor-projects-self-incompatible:20221217'
     resources:
         mem_gb=200
     log:
-        f'logs/train_X/{paramspace.wildcard_pattern}.log'
+        f'logs/train_X/tensor/{paramspace.wildcard_pattern}.log'
     shell:
         'src/{params.args0}.sh {input} {output} {params.args1} {params.args2} {params.args3} {params.args4} {params.args5} {params.args6} {params.args7} {params.args8} {params.args9} >& {log}'
 
 rule test_u_models:
     input:
         'data/test_Tensors.RData',
-        expand('output/train_X/{params}.RData', params = paramspace.wildcard_pattern)
+        expand('output/train_X/tensor/{params}.RData', params = paramspace.wildcard_pattern)
     output:
-        expand('output/test_X/{params}.csv', params = paramspace.wildcard_pattern)
+        expand('output/test_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
     params:
         args0 = lambda w: w["MODELS"],
         args1 = lambda w: w["r1"],
@@ -249,20 +252,20 @@ rule test_u_models:
         args8 = lambda w: w["r3L"],
         args9 = lambda w: w["r3R"]
     benchmark:
-        f'benchmarks/test_X/{paramspace.wildcard_pattern}.txt'
+        f'benchmarks/test_X/tensor/{paramspace.wildcard_pattern}.txt'
     container:
         'docker://koki/tensor-projects-self-incompatible:20221217'
     resources:
         mem_gb=200
     log:
-        f'logs/test_X/{paramspace.wildcard_pattern}.log'
+        f'logs/test_X/tensor/{paramspace.wildcard_pattern}.log'
     shell:
         'src/test_{params.args0}.sh {input} {output} >& {log}'
 
 rule check_size:
     input:
-        expand('output/train_X/{params}.csv', params = paramspace.wildcard_pattern),
-        expand('output/test_X/{params}.csv', params = paramspace.wildcard_pattern)
+        expand('output/train_X/tensor/{params}.csv', params = paramspace.wildcard_pattern),
+        expand('output/test_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
     output:
         expand('output/FINISH_X/{params}', params = paramspace.wildcard_pattern)
     resources:
@@ -273,3 +276,21 @@ rule check_size:
         f'logs/FINISH_X/{paramspace.wildcard_pattern}.log'
     shell:
         'src/check_size.sh {input} {output} >& {log}'
+
+
+rule SSI_scikit_rf_fit:
+    input:
+        expand('output/train_X/tensor/{params}.csv', params = paramspace.wildcard_pattern),
+        'output/y_r.csv'
+    output:
+        expand('output/train_X/fit/{params}.pickle', params = paramspace.wildcard_pattern)
+    benchmark:
+        f'benchmarks/train_X/fit/{paramspace.wildcard_pattern}.txt'
+    container:
+        "docker://yamaken37/ssi_sklearn_env:202212141249"
+    resources:
+        mem_gb=200
+    log:
+        f'logs/train_X/fit/{paramspace.wildcard_pattern}.log'
+    shell:
+        'source .bashrc && conda activate sklearn-env && python src/SSI_scikit_rf_fit.py {input} {output} >& {log}'
