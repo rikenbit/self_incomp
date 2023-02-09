@@ -34,8 +34,10 @@ test_X = pd.read_csv(args_input_test)
 # 実データのベクトルX
 X = test_X.values
 
+# predict
 X_pre = clf.predict(X)
+
+# save results
 X_pre_df = pd.DataFrame(X_pre)
 X_pre_df = X_pre_df.set_axis(['predict_value'], axis=1)
-# save
 X_pre_df.to_csv(args_output_predict, index=False)

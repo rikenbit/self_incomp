@@ -13,6 +13,9 @@ library(Biostrings)
         read_csv() |>
             as.data.frame() -> cv_value
     colnames(cv_value) <- cv_params[1]
+    #### top16####
+    eval(parse(text=paste0("colnames(cv_value) <- '", i ,"Rank_", cv_params[1], "'")))
+    ##############
     cv_value -> return_object
     return(return_object)
 }
