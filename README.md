@@ -1,2 +1,2 @@
 # self_incomp
-sakigake self-incomp
+self-incomp
