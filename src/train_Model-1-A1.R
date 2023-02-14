@@ -5,14 +5,21 @@ args <- commandArgs(trailingOnly = TRUE)
 infile <- args[1]
 outfile1 <- args[2]
 outfile2 <- args[3]
+pullout_row <- as.numeric(args[13]) #row
 
 # Loading
+# LRTensor, LigandTensor ,ReceptorTensor
 load(infile)
+LRTensor <- LRTensor[-pullout_row,,]
+LigandTensor <- LigandTensor[-pullout_row,,]
+ReceptorTensor <- ReceptorTensor[-pullout_row,,]
+# y <- y[-pullout_row]
 
 # Parameter
-r1 <- 3
-r2 <- 4
-r3 <- 5
+r1 <- as.numeric(args[4]) #r1
+r2 <- as.numeric(args[5]) #r2
+r3 <- as.numeric(args[6]) #r3
+
 
 params <- new("CoupledMWCAParams",
     # Data-wise setting
@@ -43,4 +50,4 @@ X <- t(res@common_factors$A1)
 
 # Save
 save(res, file=outfile1)
-write.csv(X, file=outfile2)
+write.csv(X, file=outfile2, row.names = FALSE)

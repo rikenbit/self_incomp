@@ -1,0 +1,118 @@
+# SSI_MT_preprocess
+###################################################
+#### import####
+import itertools as it
+import numpy as np
+import pandas as pd
+from snakemake.utils import min_version
+from snakemake.utils import Paramspace
+
+# N_row
+# pullout_row = list(map(str, range(1, 181)))
+pullout_row = list(map(str, range(1, 4)))
+
+# list_LOOCV = [
+# 'MODELS_Model-1-A1_r1_20_r2_100_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-1-A1G_r1_10_r2_20_r3_10_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-2-A1G_r1_xx_r2_10_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-3-A1_r1_10_r2_xx_r3_8_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-3-A1G_r1_10_r2_xx_r3_20_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-4-A1_r1_20_r2_100_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-4-A1G_r1_6_r2_50_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-5-A1_r1_20_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-6-A1A3G_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-7-A1A2G_r1_xx_r2_xx_r3_8_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-8-A1_r1_20_r2_xx_r3_8_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_xx_r3R_xx',
+# 'MODELS_Model-8-A1GLGR_r1_6_r2_xx_r3_10_r1L_xx_r1R_xx_r2L_25_r2R_25_r3L_xx_r3R_xx',
+# 'MODELS_Model-9-A1A4_r1_xx_r2_xx_r3_20_r1L_100_r1R_100_r2L_50_r2R_50_r3L_xx_r3R_xx',
+# 'MODELS_Model-9-A1A4GLGR_r1_xx_r2_xx_r3_20_r1L_6_r1R_6_r2L_25_r2R_25_r3L_xx_r3R_xx',
+# 'MODELS_Model-10-A1_r1_10_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_50_r2R_25_r3L_20_r3R_20',
+# 'MODELS_Model-10-A1GLGR_r1_6_r2_xx_r3_xx_r1L_xx_r1R_xx_r2L_25_r2R_50_r3L_20_r3R_10',
+# 'MODELS_Model-11-A1A4_r1_xx_r2_xx_r3_xx_r1L_100_r1R_100_r2L_25_r2R_50_r3L_10_r3R_10',
+# 'MODELS_Model-11-A1A4GLGR_r1_xx_r2_xx_r3_xx_r1L_6_r1R_6_r2L_25_r2R_25_r3L_8_r3R_8',
+# 'MODELS_Model-PCA_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx'
+# ]
+list_LOOCV = [
+'MODELS_Model-1-A1_r1_20_r2_100_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx'
+]
+
+list_join = list(it.product(list_LOOCV,pullout_row))
+list_LOOCV_row = ['_row_'.join(v) for v in list_join]
+
+
+df_Series= pd.Series(list_LOOCV_row)
+df = df_Series.str.split('_', expand=True)
+df = df.iloc[:,1::2]
+df_test=df.set_axis(['MODELS','r1', 'r2', 'r3', 'r1L', 'r1R', 'r2L', 'r2R', 'r3L', 'r3R', 'row'], axis=1)
+paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r1L', 'r1R', 'r2L', 'r2R', 'r3L', 'r3R', 'row'], param_sep="_")
+
+
+rule all:
+    input:
+        expand('output/MT_train_X/tensor/{params}.RData', params = paramspace.instance_patterns),
+        expand('output/MT_train_X/tensor/{params}.csv', params = paramspace.instance_patterns)
+
+# rule SSI_MT_preprocess:
+#     input:
+#         'data/multi_align_gap/sp11alnfinal90seq.aln',
+#         'data/multi_align_gap/SRKfinal_90seq.aln'
+#     output:
+#         'data/MT_train_Tensors.RData'
+#         'data/MT_onerow_Tensors.RData'
+#     benchmark:
+#         'benchmarks/MT_train_Tensors.txt'
+#     container:
+#         'docker://koki/tensor-projects-self-incompatible:20221217'
+#     resources:
+#         mem_gb=200
+#     log:
+#         'logs/MT_train_Tensors.log'
+#     shell:
+#         'src/SSI_MT_preprocess.sh {input} {output}>& {log}'
+
+rule preprocess_train:
+    input:
+        'data/multi_align_gap/sp11alnfinal90seq.aln',
+        'data/multi_align_gap/SRKfinal_90seq.aln'
+    output:
+        'data/train_Tensors.RData'
+    resources:
+        mem_gb=50
+    benchmark:
+        'benchmarks/preprocess_train.txt'
+    container:
+        'docker://koki/tensor-projects-self-incompatible:20221217'
+    log:
+        'logs/preprocess_train.log'
+    shell:
+        'src/preprocess_train.sh {input} {output} >& {log}'
+
+rule train_u_models:
+    input:
+        # 'data/MT_train_Tensors.RData'
+        'data/train_Tensors.RData'
+    output:
+        expand('output/MT_train_X/tensor/{params}.RData', params = paramspace.wildcard_pattern),
+        expand('output/MT_train_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
+    params:
+        args0 = lambda w: w["MODELS"],
+        args1 = lambda w: w["r1"],
+        args2 = lambda w: w["r2"],
+        args3 = lambda w: w["r3"],
+        args4 = lambda w: w["r1L"],
+        args5 = lambda w: w["r1R"],
+        args6 = lambda w: w["r2L"],
+        args7 = lambda w: w["r2R"],
+        args8 = lambda w: w["r3L"],
+        args9 = lambda w: w["r3R"],
+        args10 = lambda w: w["row"]
+    benchmark:
+        f'benchmarks/MT_train_X/tensor/{paramspace.wildcard_pattern}.txt'
+    container:
+        'docker://koki/tensor-projects-self-incompatible:20221217'
+    resources:
+        mem_gb=200
+    log:
+        f'logs/MT_train_X/tensor/{paramspace.wildcard_pattern}.log'
+    shell:
+        'src/train_{params.args0}.sh {input} {output} {params.args1} {params.args2} {params.args3} {params.args4} {params.args5} {params.args6} {params.args7} {params.args8} {params.args9} {params.args10} >& {log}'
