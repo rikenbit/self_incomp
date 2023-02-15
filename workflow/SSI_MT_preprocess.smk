@@ -54,25 +54,8 @@ rule all:
         # expand('output/MT_train_X/one_slice_tensor/{params}.RData', params = paramspace.instance_patterns)
         # # expand('output/MT_train_X/fit/{params}.pickle', params = paramspace.instance_patterns)
         # expand('output/MT_test_X/tensor/{params}.csv', params = paramspace.instance_patterns)
-        expand('output/MT_test_X/predict/{params}.csv', params = paramspace.instance_patterns)
-
-# rule SSI_MT_preprocess:
-#     input:
-#         'data/multi_align_gap/sp11alnfinal90seq.aln',
-#         'data/multi_align_gap/SRKfinal_90seq.aln'
-#     output:
-#         'data/MT_train_Tensors.RData'
-#         'data/MT_onerow_Tensors.RData'
-#     benchmark:
-#         'benchmarks/MT_train_Tensors.txt'
-#     container:
-#         'docker://koki/tensor-projects-self-incompatible:20221217'
-#     resources:
-#         mem_gb=200
-#     log:
-#         'logs/MT_train_Tensors.log'
-#     shell:
-#         'src/SSI_MT_preprocess.sh {input} {output}>& {log}'
+        # expand('output/MT_test_X/predict/{params}.csv', params = paramspace.instance_patterns)
+        'output/MT_test_X/predict_df.csv'
 
 rule preprocess_train:
     input:
@@ -93,7 +76,6 @@ rule preprocess_train:
 
 rule train_u_models:
     input:
-        # 'data/MT_train_Tensors.RData'
         'data/train_Tensors.RData'
     output:
         expand('output/MT_train_X/tensor/{params}.RData', params = paramspace.wildcard_pattern),
@@ -176,3 +158,22 @@ rule SSI_U_Predict:
         f'logs/MT_test_X/predict/{paramspace.wildcard_pattern}.log'
     shell:
         'source .bashrc && conda activate sklearn-env && python src/SSI_U_Predict.py {input} {output} >& {log}'
+
+rule SSI_ModelTest:
+    input:
+        expand('output/MT_test_X/predict/{params}.csv', params = paramspace.instance_patterns)
+    output:
+        'output/MT_test_X/predict_df.csv'
+    params:
+        'output/MT_test_X/predict',
+        'output/y_r.csv'
+    benchmark:
+        'benchmarks/MT_test_X/predict_df.txt'
+    container:
+        "docker://yamaken37/biostrings_tidy:2023020717"
+    resources:
+        mem_gb=200
+    log:
+        'logs/MT_test_X/predict_df.log'
+    shell:
+        'src/SSI_ModelTest.sh {output} {params} >& {log}'
