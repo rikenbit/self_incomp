@@ -16,8 +16,8 @@ LigandTensor <- LigandTensor[-pullout_row,,]
 ReceptorTensor <- ReceptorTensor[-pullout_row,,]
 
 # Parameter
-r1 <- as.numeric(args[4]) #r1
-r2 <- as.numeric(args[5]) #r2
+r1 <- as.numeric(args[1]) #r1
+r2 <- as.numeric(args[2]) #r2
 
 params <- new("CoupledMWCAParams",
     # Data-wise setting
