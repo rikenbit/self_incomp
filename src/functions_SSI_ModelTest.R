@@ -3,10 +3,6 @@
 library(tidyverse)
 ##################################################
 .df_onecol  = function(i) {
-    # cv_filenames[i] |>
-    #     str_remove(".csv") |>
-    #     strsplit("_") |>
-    #     unlist() -> cv_col_vec
     input_path_list[i] |> 
         str_remove(args_input_dir2) |> 
         str_remove(".csv") |> 
