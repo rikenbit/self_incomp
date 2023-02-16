@@ -8,8 +8,8 @@ from snakemake.utils import min_version
 from snakemake.utils import Paramspace
 
 # N_row
-# pullout_row = list(map(str, range(1, 181)))
-pullout_row = list(map(str, range(1, 4)))
+pullout_row = list(map(str, range(1, 181)))
+# pullout_row = list(map(str, range(1, 4)))
 
 # list_LOOCV = [
 # 'MODELS_Model-1-A1_r1_20_r2_100_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
@@ -51,12 +51,12 @@ paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r
 
 rule all:
     input:
-        expand('output/MT_train_X/tensor/{params}.RData', params = paramspace.instance_patterns),
-        expand('output/MT_train_X/tensor/{params}.csv', params = paramspace.instance_patterns),
-        expand('output/MT_train_X/one_slice_tensor/{params}.RData', params = paramspace.instance_patterns)
-        # # expand('output/MT_train_X/fit/{params}.pickle', params = paramspace.instance_patterns)
+        # expand('output/MT_train_X/tensor/{params}.RData', params = paramspace.instance_patterns),
+        # expand('output/MT_train_X/tensor/{params}.csv', params = paramspace.instance_patterns),
+        # expand('output/MT_train_X/one_slice_tensor/{params}.RData', params = paramspace.instance_patterns)
+        # # # expand('output/MT_train_X/fit/{params}.pickle', params = paramspace.instance_patterns)
         # expand('output/MT_test_X/tensor/{params}.csv', params = paramspace.instance_patterns)
-        # expand('output/MT_test_X/predict/{params}.csv', params = paramspace.instance_patterns)
+        expand('output/MT_test_X/predict/{params}.csv', params = paramspace.instance_patterns)
         # 'output/MT_test_X/predict_df.csv'
 
 rule preprocess_train:
@@ -106,57 +106,57 @@ rule train_u_models:
     shell:
         'src/train_{params.args0}.sh {params.args1} {params.args2} {params.args3} {params.args4} {params.args5} {params.args6} {params.args7} {params.args8} {params.args9} {params.args10} {input} {output}  >& {log}'
 
-# rule SSI_scikit_rf_fit_MT:
-#     input:
-#         expand('output/MT_train_X/tensor/{params}.csv', params = paramspace.wildcard_pattern),
-#         'output/y_r.csv'
-#     output:
-#         expand('output/MT_train_X/fit/{params}.pickle', params = paramspace.wildcard_pattern)
-#     params:
-#         args10 = lambda w: w["row"]
-#     benchmark:
-#         f'benchmarks/MT_train_X/fit/{paramspace.wildcard_pattern}.txt'
-#     container:
-#         "docker://yamaken37/ssi_sklearn_env:202212141249"
-#     resources:
-#         mem_gb=200
-#     log:
-#         f'logs/MT_train_X/fit/{paramspace.wildcard_pattern}.log'
-#     shell:
-#         'source .bashrc && conda activate sklearn-env && python src/SSI_scikit_rf_fit_MT.py {input} {output} {params.args10} >& {log}'
+rule SSI_scikit_rf_fit_MT:
+    input:
+        expand('output/MT_train_X/tensor/{params}.csv', params = paramspace.wildcard_pattern),
+        'output/y_r.csv'
+    output:
+        expand('output/MT_train_X/fit/{params}.pickle', params = paramspace.wildcard_pattern)
+    params:
+        args10 = lambda w: w["row"]
+    benchmark:
+        f'benchmarks/MT_train_X/fit/{paramspace.wildcard_pattern}.txt'
+    container:
+        "docker://yamaken37/ssi_sklearn_env:202212141249"
+    resources:
+        mem_gb=200
+    log:
+        f'logs/MT_train_X/fit/{paramspace.wildcard_pattern}.log'
+    shell:
+        'source .bashrc && conda activate sklearn-env && python src/SSI_scikit_rf_fit_MT.py {input} {output} {params.args10} >& {log}'
 
-# rule test_u_models:
-#     input:
-#         expand('output/MT_train_X/one_slice_tensor/{params}.RData', params = paramspace.wildcard_pattern),
-#         expand('output/MT_train_X/tensor/{params}.RData', params = paramspace.wildcard_pattern)
-#     output:
-#         expand('output/MT_test_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
-#     params:
-#         args0 = lambda w: w["MODELS"]
-#     benchmark:
-#         f'benchmarks/MT_test_X/tensor/{paramspace.wildcard_pattern}.txt'
-#     container:
-#         'docker://koki/tensor-projects-self-incompatible:20221217'
-#     resources:
-#         mem_gb=200
-#     log:
-#         f'logs/MT_test_X/tensor/{paramspace.wildcard_pattern}.log'
-#     shell:
-#         'src/test_{params.args0}.sh {input} {output} >& {log}'
+rule test_u_models:
+    input:
+        expand('output/MT_train_X/one_slice_tensor/{params}.RData', params = paramspace.wildcard_pattern),
+        expand('output/MT_train_X/tensor/{params}.RData', params = paramspace.wildcard_pattern)
+    output:
+        expand('output/MT_test_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
+    params:
+        args0 = lambda w: w["MODELS"]
+    benchmark:
+        f'benchmarks/MT_test_X/tensor/{paramspace.wildcard_pattern}.txt'
+    container:
+        'docker://koki/tensor-projects-self-incompatible:20221217'
+    resources:
+        mem_gb=200
+    log:
+        f'logs/MT_test_X/tensor/{paramspace.wildcard_pattern}.log'
+    shell:
+        'src/test_{params.args0}.sh {input} {output} >& {log}'
 
-# rule SSI_U_Predict:
-#     input:
-#         expand('output/MT_train_X/fit/{params}.pickle', params = paramspace.wildcard_pattern),
-#         expand('output/MT_test_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
-#     output:
-#         expand('output/MT_test_X/predict/{params}.csv', params = paramspace.wildcard_pattern)
-#     benchmark:
-#         f'benchmarks/MT_test_X/predict/{paramspace.wildcard_pattern}.txt'
-#     container:
-#         "docker://yamaken37/ssi_sklearn_env:202212141249"
-#     resources:
-#         mem_gb=200
-#     log:
-#         f'logs/MT_test_X/predict/{paramspace.wildcard_pattern}.log'
-#     shell:
-#         'source .bashrc && conda activate sklearn-env && python src/SSI_U_Predict.py {input} {output} >& {log}'
+rule SSI_U_Predict:
+    input:
+        expand('output/MT_train_X/fit/{params}.pickle', params = paramspace.wildcard_pattern),
+        expand('output/MT_test_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
+    output:
+        expand('output/MT_test_X/predict/{params}.csv', params = paramspace.wildcard_pattern)
+    benchmark:
+        f'benchmarks/MT_test_X/predict/{paramspace.wildcard_pattern}.txt'
+    container:
+        "docker://yamaken37/ssi_sklearn_env:202212141249"
+    resources:
+        mem_gb=200
+    log:
+        f'logs/MT_test_X/predict/{paramspace.wildcard_pattern}.log'
+    shell:
+        'source .bashrc && conda activate sklearn-env && python src/SSI_U_Predict.py {input} {output} >& {log}'

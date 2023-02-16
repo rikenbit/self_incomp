@@ -2,20 +2,26 @@ source("src/Functions.R")
 
 # Arguments
 args <- commandArgs(trailingOnly = TRUE)
-infile <- args[1]
-outfile1 <- args[2]
-outfile2 <- args[3]
+infile <- args[11]
+outfile1 <- args[12]
+outfile2 <- args[13]
+outfile3 <- args[14]
+pullout_row <- as.numeric(args[10]) #row
 
 # Loading
+# LRTensor, LigandTensor ,ReceptorTensor
 load(infile)
+LRTensor <- LRTensor[-pullout_row,,]
+LigandTensor <- LigandTensor[-pullout_row,,]
+ReceptorTensor <- ReceptorTensor[-pullout_row,,]
 
 # Parameter
-r1 <- 3
-r2 <- 4
-r3 <- 5
-r4 <- 6
-r5 <- 7
-r6 <- 8
+r1 <- as.numeric(args[4]) #r1L
+r2 <- as.numeric(args[6]) #r2L
+r3 <- as.numeric(args[8]) #r3L
+r4 <- as.numeric(args[5]) #r1R
+r5 <- as.numeric(args[7]) #r2R
+r6 <- as.numeric(args[9]) #r3R
 
 params <- new("CoupledMWCAParams",
     # Data-wise setting
@@ -50,4 +56,17 @@ X <- cbind(rs_unfold(as.tensor(tmp1), m=1)@data, rs_unfold(as.tensor(tmp2), m=1)
 
 # Save
 save(res, file=outfile1)
-write.csv(X, file=outfile2)
+write.csv(X, file=outfile2, row.names = FALSE)
+
+# Save for 射影
+load(infile)
+LRTensor <- array(LRTensor[pullout_row,,],
+                  c(1, dim(LRTensor[pullout_row,,]))
+                  )
+LigandTensor <- array(LigandTensor[pullout_row,,],
+                      c(1, dim(LigandTensor[pullout_row,,]))
+                      )
+ReceptorTensor <- array(ReceptorTensor[pullout_row,,],
+                  c(1, dim(ReceptorTensor[pullout_row,,]))
+                  )
+save(LRTensor, LigandTensor, ReceptorTensor, file=outfile3)
