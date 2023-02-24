@@ -7,8 +7,8 @@ from snakemake.utils import min_version
 from snakemake.utils import Paramspace
 
 # N_row
-# pullout_row = list(map(str, range(1, 181)))
-pullout_row = list(map(str, range(1, 4)))
+pullout_row = list(map(str, range(1, 181)))
+# pullout_row = list(map(str, range(1, 4)))
 
 list_LOOCV = [
 'MODELS_Model-1-A1_r1_20_r2_100_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
@@ -144,19 +144,3 @@ rule SSI_U_Predict:
         f'logs/MT_test_X/predict/{paramspace.wildcard_pattern}.log'
     shell:
         'source .bashrc && conda activate sklearn-env && python src/SSI_U_Predict.py {input} {output} >& {log}'
-
-# rule SSI_toy_MT_Accuracy:
-#     input:
-#         Mem_matrix = 'output/WTS4/normalize_1/{range}/{dist}/Membership/k_Number_{N_cls}.RData'
-#     output:
-#         m_data = 'output/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.RData'
-#     benchmark:
-#         'benchmarks/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.txt'
-#     container:
-#         "docker://docker_images"
-#     resources:
-#         mem_gb=200
-#     log:
-#         'logs/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.log'
-#     shell:
-#         'src/SSI_toy_MT_Accuracy.sh {wildcards.Re_cls} {input.Mem_matrix} {output.m_data}>& {log}'
