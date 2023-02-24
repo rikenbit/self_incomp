@@ -42,7 +42,7 @@ rule all:
 
 rule preprocess:
     output:
-        'output/toy/inputTensors.RData'
+        'data/toy/inputTensors.RData'
     resources:
         mem_gb=50
     benchmark:
@@ -56,7 +56,7 @@ rule preprocess:
 
 rule u_models:
     input:
-        'output/toy/inputTensors.RData'
+        'data/toy/inputTensors.RData'
     output:
         expand('output/toy/X_Tensor/{params}.RData', params = paramspace.wildcard_pattern),
         expand('output/toy/X_Tensor/{params}.csv', params = paramspace.wildcard_pattern)
