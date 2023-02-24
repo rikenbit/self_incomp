@@ -37,7 +37,8 @@ paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r
 
 rule all:
     input:
-        expand('output/toy/LOOCV_rf/{params}.csv', params = paramspace.instance_patterns)
+        # expand('output/toy/LOOCV_rf/{params}.csv', params = paramspace.instance_patterns)
+        'output/toy/Tensor_viz/19Umodel_TopPara/X_Tensor_LOOCV_rf.csv'
 
 rule preprocess:
     output:
@@ -97,3 +98,21 @@ rule SSI_scikit_rf:
         f'logs/toy/LOOCV_rf/{paramspace.wildcard_pattern}.log'
     shell:
         'source .bashrc && conda activate sklearn-env && python src/SSI_scikit_rf.py {input} {output} >& {log}'
+
+rule SSI_Vis_Model:
+    input:
+        expand('output/toy/LOOCV_rf/{params}.csv', params = paramspace.instance_patterns)
+    output:
+        'output/toy/Tensor_viz/19Umodel_TopPara/X_Tensor_LOOCV_rf.csv'
+    params:
+        input_dir = 'output/toy/LOOCV_rf'
+    benchmark:
+        'benchmarks/toy/Tensor_viz/19Umodel_TopPara/X_Tensor_LOOCV_rf.txt'
+    container:
+        'docker://yamaken37/ssi_vis_pairplot:20230106'
+    resources:
+        mem_gb=200
+    log:
+        'logs/toy/Tensor_viz/19Umodel_TopPara/X_Tensor_LOOCV_rf.log'
+    shell:
+        'src/SSI_tensor_viz.sh {params.input_dir} {output} >& {log}'
