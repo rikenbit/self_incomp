@@ -9,9 +9,14 @@ library(tidyverse)
                                 Accuracy=MT_value[2])
 }
 
-args_input_dir <- c("output/MT_test_X/predict")
+# args_input_dir <- c("output/MT_test_X/predict")
+# args_input_pattern <- c("Accuracy")
+# args_output <- c("output/MT_test_X/predict_df/Accuracy_table.csv")
+
+# 自力LOOCV方式
+args_input_dir <- c("output/toy/MT_test_X/predict")
 args_input_pattern <- c("Accuracy")
-args_output <- c("output/MT_test_X/predict_df/Accuracy_table.csv")
+args_output <- c("output/toy/MT_test_X/predict_df/Accuracy_table.csv")
 
 MT_filenames <- list.files(args_input_dir,
                            pattern = args_input_pattern,
