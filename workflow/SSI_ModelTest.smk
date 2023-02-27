@@ -57,6 +57,7 @@ list_LOOCV = [
 #     shell:
 #         'src/SSI_ModelTest.sh {output} {params} {wildcards.list_l} >& {log}'
 
+#### SSI_toy_MT_Accuracy.smkの集計####
 rule all:
     input:
         expand('output/toy/MT_test_X/predict_df/{list_l}.csv', list_l=list_LOOCV)
@@ -80,3 +81,4 @@ rule SSI_ModelTest:
         'logs/MT_test_X/predict_df/{list_l}.log'
     shell:
         'src/SSI_ModelTest.sh {output} {params} {wildcards.list_l} >& {log}'
+########
