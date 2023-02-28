@@ -10,6 +10,7 @@ args_rel_change <- args[3]
 # args_rec_error <- c("output/Vis_train/train_X/MODELS_Model-1-A1_r1_20_r2_100_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx/rec_error.png")
 # args_rel_change <- c("output/Vis_train/train_X/MODELS_Model-1-A1_r1_20_r2_100_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx/rel_change.png")
 
+load("args_input")
 #### rec_error####
 rec_error <- as.numeric(res@rec_error)
 rec_error <- rec_error[2:length(rec_error)]
