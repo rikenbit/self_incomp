@@ -23,23 +23,23 @@ list_LOOCV = [
 
 rule all:
     input:
-        expand('output/Vis_train/train_X/{list_l}/rec_error.png', list_l=list_LOOCV),
-        expand('output/Vis_train/train_X/{list_l}/rel_change.png', list_l=list_LOOCV)
+        expand('output/Vis_train/train_X/rec_error/{list_l}.png', list_l=list_LOOCV),
+        expand('output/Vis_train/train_X/rel_change/{list_l}.png', list_l=list_LOOCV)
 
 rule SSI_Vis_train:
     input:
          'output/train_X/tensor/{list_l}.RData'
     output:
-        'output/Vis_train/train_X/{list_l}/rec_error.png',
-        'output/Vis_train/train_X/{list_l}/rel_change.png',
+        'output/Vis_train/train_X/rec_error/{list_l}.png',
+        'output/Vis_train/train_X/rel_change/{list_l}.png',
     benchmark:
-        'benchmarks/Vis_train/train_X/{list_l}/rec_error.txt'
+        'benchmarks/Vis_train/train_X/rec_error/{list_l}.txt'
     container:
         "docker://yamaken37/ssi_vis_pairplot:20230106"
     resources:
         mem_gb=200
     log:
-        'logs/Vis_train/train_X/{list_l}/rec_error.log'
+        'logs/Vis_train/train_X/rec_error/{list_l}.log'
     shell:
         'src/SSI_Vis_train.sh {input} {output} >& {log}'
 
