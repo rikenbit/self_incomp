@@ -10,6 +10,8 @@ args_input_dir <- c("output/toy/MT_train_X/tensor")
 args_input_dir2 <- c("output/toy/MT_train_X/tensor/")
 args_input_pattern <- c("MODELS_Model-1-A1G_r1_10_r2_20_r3_10_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx_row")
 
+args_rel_change <- c("output/toy/Vis_train/MODELS_Model-1-A1G_r1_10_r2_20_r3_10_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx_row.png")
+
 # get dirname
 list.files(args_input_dir,
            pattern = args_input_pattern,
@@ -35,10 +37,45 @@ for(i in cv_sort){
     input_path_list <- c(input_path_list, path)
 }
 
+# purrr
+purrr::map_dfc(cv_sort, .df_rel_change) |> 
+    rownames_to_column("order") -> df_rel_change
+# pivot_longer
+df_rel_change |> 
+    pivot_longer(!order, 
+                 names_to = "Pullout_row", 
+                 values_to = "RelChange") -> df_rel_change_long
 
-# purrrで各行のresを読み込んでcbind（map_dfc）、列名にrowNo.、
-purrr::map_dfc(cv_sort, .df_rel_change) -> df_rel_change
-# purrr後に縦長に変形
+row_order <- c()
+for (i in cv_sort) {
+    eval(parse(text=paste0("row_order <- c(row_order,'row_",i,"')")))
+}
+order_order <- df_rel_change$order
 
-
+gg_rel_change <- ggplot(df_rel_change_long,
+                        aes(x = factor(order, levels = order_order),
+                            y = RelChange,
+                            color = factor(Pullout_row, levels = row_order)
+                            )
+                        ) +
+    geom_point(size=2.0, alpha = 0.6) +
+    # theme(legend.position = "none") +
+    labs(title = "RelChange",
+         color="Pullout_row",
+         x = "order") +
+    theme(text = element_text(size = 60)) +
+    theme(plot.title = element_text(hjust = 0.5)) +
+    theme(
+        legend.position = c(1, 1),
+        legend.justification = c(1, 1),
+        legend.text = element_text(size=30),
+        legend.title = element_text(size=30)
+        ) +
+    scale_y_log10()
 #### ggsave####
+ggsave(filename = args_rel_change,
+       plot = gg_rel_change,
+       dpi = 100,
+       width = 30.0,
+       height = 30.0,
+       limitsize = FALSE)
