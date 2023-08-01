@@ -10,20 +10,20 @@ from snakemake.utils import Paramspace
 # container: 'docker://koki/tensor-projects-self-incompatible:20221217'
 
 # MODEL pattern
-U_MODELS = [
-    'Model-1-A1G', 'Model-1-A1',
-    'Model-2-A1G',
-    'Model-3-A1G', 'Model-3-A1',
-    'Model-4-A1G', 'Model-4-A1',
-    'Model-5-A1',
-    'Model-6-A1A3G',
-    'Model-7-A1A2G',
-    'Model-8-A1GLGR', 'Model-8-A1',
-    'Model-9-A1A4GLGR', 'Model-9-A1A4',
-    'Model-10-A1GLGR', 'Model-10-A1',
-    'Model-11-A1A4GLGR', 'Model-11-A1A4',
-    'Model-PCA']
-# U_MODELS = ['Model-1-A1G']
+# U_MODELS = [
+#     'Model-1-A1G', 'Model-1-A1',
+#     'Model-2-A1G',
+#     'Model-3-A1G', 'Model-3-A1',
+#     'Model-4-A1G', 'Model-4-A1',
+#     'Model-5-A1',
+#     'Model-6-A1A3G',
+#     'Model-7-A1A2G',
+#     'Model-8-A1GLGR', 'Model-8-A1',
+#     'Model-9-A1A4GLGR', 'Model-9-A1A4',
+#     'Model-10-A1GLGR', 'Model-10-A1',
+#     'Model-11-A1A4GLGR', 'Model-11-A1A4',
+#     'Model-PCA']
+U_MODELS = ['Model-PCA']
 
 # # gene LRpair 3patterm
 # # 4574job/5406→2073条件で、12時間かかった
