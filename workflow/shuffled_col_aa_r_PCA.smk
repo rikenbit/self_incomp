@@ -1,41 +1,63 @@
 # shuffled_col_aa_r_PCA
 ###################################################
-# No. of Clusters
-N_CLUSTERS = list(map(str, range(2, 21)))
-# N_CLUSTERS = ["3"]
+import itertools as it
+import numpy as np
+import pandas as pd
+from snakemake.utils import min_version
 
-# Distance Data
-dist_data = ["EUCL","SBD_abs"]
-# dist_data = ["SBD_abs"]
-
-# data time range
-time_range = ["stimAfter"]
-
-# ReClustering method
-ReClustering_method = ["CSPA","OINDSCAL","MCMIHOOI"]
-# ReClustering_method = ["CSPA"]
+dimention = ["5","10","100"]
 
 rule all:
     input:
-        expand('output/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.RData',
-            range=time_range,
-            dist=dist_data,
-            N_cls=N_CLUSTERS,
-            Re_cls=ReClustering_method
-            )
-        
-rule shuffled_col_aa_r_PCA:
+        expand('output/LOOCV_rf/shuffled_col_aa_r_PCA_{DIM}.csv', DIM=dimention,)
+
+rule preprocess:
     input:
-        Mem_matrix = 'output/WTS4/normalize_1/{range}/{dist}/Membership/k_Number_{N_cls}.RData'
+        'data/multi_align_gap/sp11alnfinal90seq.aln',
+        'data/multi_align_gap/SRKfinal_90seq.aln'
     output:
-        m_data = 'output/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.RData'
+        'output/inputTensors.RData'
+    resources:
+        mem_gb=50
     benchmark:
-        'benchmarks/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.txt'
+        'benchmarks/preprocess.txt'
     container:
-        "docker://docker_images"
+        'docker://koki/tensor-projects-self-incompatible:20221217'
+    log:
+        'logs/preprocess.log'
+    shell:
+        'src/preprocess.sh {input} {output} >& {log}'
+
+rule u_models:
+    input:
+        'output/inputTensors.RData'
+    output:
+        'output/X_Tensor/shuffled_col_aa_r_PCA_{DIM}.RData',
+        'output/X_Tensor/shuffled_col_aa_r_PCA_{DIM}.csv'
+    benchmark:
+        'benchmarks/X_Tensor/shufled_PCA_{DIM}.txt'
+    container:
+        'docker://yamaken37/shuffled_pca:20230801'
     resources:
         mem_gb=200
     log:
-        'logs/WTS4/normalize_1/{range}/{dist}/{Re_cls}/Merged_data/k_Number_{N_cls}.log'
+        'logs/X_Tensor/shuffled_col_aa_r_PCA_{DIM}.log'
     shell:
-        'src/shuffled_col_aa_r_PCA.sh {wildcards.Re_cls} {input.Mem_matrix} {output.m_data}>& {log}'
+        'src/shuffled_col_aa_r_PCA.sh {input} {output} {wildcards.DIM}'
+
+rule SSI_scikit_rf:
+    input:
+        'output/X_Tensor/shuffled_col_aa_r_PCA_{DIM}.csv',
+        'output/SSI/y_r.csv'
+    output:
+        'output/LOOCV_rf/shuffled_col_aa_r_PCA_{DIM}.csv'
+    benchmark:
+        'benchmarks/LOOCV_rf/shuffled_col_aa_r_PCA_{DIM}.txt'
+    container:
+        "docker://yamaken37/ssi_sklearn_env:202212141249"
+    resources:
+        mem_gb=200
+    log:
+        'logs/LOOCV_rf/shuffled_col_aa_r_PCA_{DIM}.log'
+    shell:
+        'source .bashrc && conda activate sklearn-env && python src/SSI_scikit_rf.py {input} {output} >& {log}'

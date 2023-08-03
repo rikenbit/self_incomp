@@ -35,7 +35,7 @@ rule u_models:
         'output/X_Tensor/shuffled_col_r_PCA_{DIM}.RData',
         'output/X_Tensor/shuffled_col_r_PCA_{DIM}.csv'
     benchmark:
-        'benchmarks/X_Tensor/shufled_PCA_{DIM}.txt'
+        'benchmarks/X_Tensor/shuffled_col_r_PCA_{DIM}.txt'
     container:
         'docker://yamaken37/shuffled_pca:20230801'
     resources:
