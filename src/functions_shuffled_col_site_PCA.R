@@ -1,7 +1,6 @@
 #library
 ##################################################
-library()
+library(Biostrings)
+library(rTensor)
+library(tidyverse)
 ##################################################
-.func = function(x) {
-	return(return_object)
-}
