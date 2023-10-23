@@ -6,9 +6,6 @@ infile1 <- args[1]
 infile2 <- args[2]
 outfile <- args[3]
 
-# infile1 <- c("output/PCA_scale/MT_train_X/one_slice_tensor/MODELS_Model-PCA_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx_row_1.RData")
-# infile2 <- c("output/PCA_scale/MT_train_X/tensor/MODELS_Model-PCA_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx_row_1.RData")
-
 # 1行test_X LRTensor LigandTensor ReceptorTensor 
 load(infile1)
 # Reshape

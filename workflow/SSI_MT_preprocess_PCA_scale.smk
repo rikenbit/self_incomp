@@ -112,7 +112,7 @@ rule test_u_models:
     log:
         f'logs/MT_test_X/tensor/{paramspace.wildcard_pattern}.log'
     shell:
-        'src/test_{params.args0}.sh {input} {output} >& {log}'
+        'src/test_{params.args0}_scale.sh {input} {output} >& {log}'
 
 rule SSI_U_Predict:
     input:
