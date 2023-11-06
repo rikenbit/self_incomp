@@ -40,6 +40,6 @@ LigandTensor <- array(LigandTensor[pullout_row,,],
                       c(1, dim(LigandTensor[pullout_row,,]))
                       )
 ReceptorTensor <- array(ReceptorTensor[pullout_row,,],
-                  c(1, dim(ReceptorTensor[pullout_row,,]))
-                  )
+                        c(1, dim(ReceptorTensor[pullout_row,,]))
+                        )
 save(LRTensor, LigandTensor, ReceptorTensor, file=outfile3)
