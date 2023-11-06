@@ -1,6 +1,5 @@
 # MODEL_Parameter = ['']
-# n_pca_dim = list(map(str, range(5, 11)))
-n_pca_dim = list(map(str, range(10, 11)))
+n_pca_dim = list(map(str, range(5, 12)))
 
 #### import####
 import itertools as it
@@ -50,7 +49,7 @@ rule preprocess_test:
     shell:
         'src/preprocess_test.sh {input} {output} >& {log}'
 
-rule SSI_fixPredict_toCSV: #訓練データのCSV変換
+rule SSI_fixPredict_toCSV: #テスト&訓練データのCSV変換
     input:
         'data/train_Tensors.RData',
         'data/test_Tensors.RData'
