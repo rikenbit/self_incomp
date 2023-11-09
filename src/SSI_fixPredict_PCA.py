@@ -35,12 +35,11 @@ X_test = x_test_csv.values
 #### sci-kit learn####
 pca = PCA(n_components=args_input_dim)  # 主成分の数を適切に設定
 clf = RandomForestClassifier(random_state=1234, n_estimators=1000)
-predicts = [] #予測結果格納
 
 # 訓練データ・PCA
 X_train_pca = pca.fit_transform(X_train)
 
-#### 射影&予測####
+#### PCA射影&予測####
 X_test_pca = pca.transform(X_test)
 clf.fit(X_train_pca, y_train)
 y_pred = clf.predict(X_test_pca)
