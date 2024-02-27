@@ -1,6 +1,6 @@
 .nfs*
 ._*
-.DS_Store
+*.DS_Store
 .snakemake/*
 data/*
 output/*
@@ -25,3 +25,4 @@ logs.log
 *.bashrc
 *.cache
 output*
+*.gitignore
