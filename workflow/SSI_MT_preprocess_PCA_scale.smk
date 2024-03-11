@@ -25,14 +25,14 @@ df_test=df.set_axis(['MODELS','r1', 'r2', 'r3', 'r1L', 'r1R', 'r2L', 'r2R', 'r3L
 paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r1L', 'r1R', 'r2L', 'r2R', 'r3L', 'r3R', 'row'], param_sep="_")
 
 
-# rule all:
-#     input:
-#         expand('output/pyPCA_scaled/test_X/predict/{params}.csv', params = paramspace.instance_patterns)
 rule all:
     input:
-        expand('output/pyPCA_scaled/train_X/tensor/{params}.RData', params = paramspace.instance_patterns),
-        expand('output/pyPCA_scaled/train_X/tensor/{params}.csv', params = paramspace.instance_patterns),
-        expand('output/pyPCA_scaled/train_X/one_slice_tensor/{params}.RData', params = paramspace.instance_patterns)
+        expand('output/pyPCA_scaled/test_X/predict/{params}.csv', params = paramspace.instance_patterns)
+# rule all:
+#     input:
+#         expand('output/pyPCA_scaled/train_X/tensor/{params}.RData', params = paramspace.instance_patterns),
+#         expand('output/pyPCA_scaled/train_X/tensor/{params}.csv', params = paramspace.instance_patterns),
+#         expand('output/pyPCA_scaled/train_X/one_slice_tensor/{params}.RData', params = paramspace.instance_patterns)
 
 rule preprocess_train:
     input:
