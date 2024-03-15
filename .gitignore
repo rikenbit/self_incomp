@@ -26,3 +26,4 @@ logs.log
 *.cache
 output*
 *.gitignore
+old-log/*
