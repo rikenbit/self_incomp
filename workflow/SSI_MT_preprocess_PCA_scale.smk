@@ -94,7 +94,7 @@ rule SSI_scikit_rf_fit_MT:
     log:
         f'logs/pyPCA_scaled/train_X/fit/{paramspace.wildcard_pattern}.log'
     shell:
-        'source ~/.bashrc && conda activate sklearn-env && python src/SSI_scikit_rf_fit_MT.py {input} {output} {params.args10} >& {log}'
+        'source /opt/conda/etc/profile.d/conda.sh && conda activate sklearn-env && python src/SSI_scikit_rf_fit_MT.py {input} {output} {params.args10} >& {log}'
 
 # rule test_u_models:
 #     input:
