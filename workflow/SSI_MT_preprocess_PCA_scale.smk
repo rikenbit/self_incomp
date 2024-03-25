@@ -130,3 +130,4 @@ rule SSI_U_Predict:
         f'logs/pyPCA_scaled/test_X/predict/{paramspace.wildcard_pattern}.log'
     shell:
         'source /opt/conda/etc/profile.d/conda.sh && conda activate sklearn-env && python src/SSI_U_Predict.py {input} {output} >& {log}'
+# NEXT：SSI_ModelTest_PCA.smk
