@@ -11,11 +11,5 @@
 #SBATCH -p node03-06
 SLURM_RESTART_COUNT=2
 
-# conda
-# echo $@
-# echo $CONDA_PREFIX
-# $CONDA_PREFIX/bin/Rscript src/SSI_ModelTest.R $@
-
 # docker
-echo $@
 Rscript src/SSI_ModelTest.R $@

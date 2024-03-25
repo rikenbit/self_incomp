@@ -26,7 +26,7 @@ rule SSI_ModelTest:
     params:
         'output/pyPCA_scaled/test_X/predict',
         'output/pyPCA_scaled/test_X/predict/',
-        'data/y_r.csv'
+        'output/SSI/y_r.csv'
     benchmark:
         'benchmarks/pyPCA_scaled/test_X/predict_df/{list_l}.txt'
     container:
