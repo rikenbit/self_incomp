@@ -1,6 +1,6 @@
 # MODEL_Parameter = ['']
-# n_pca_dim = list(map(str, range(5, 12)))
-n_pca_dim = ['5']
+n_pca_dim = list(map(str, range(5, 12)))
+# n_pca_dim = ['5']
 
 #### import####
 import itertools as it
