@@ -85,4 +85,5 @@ rule SSI_fixPredict_PCA:
     log:
         'logs/SSI_fixPredict_PCA/predict/Model-PCA_{npdim}.log'
     shell:
-        'source .bashrc && conda activate sklearn-env && python src/SSI_fixPredict_PCA.py {input} {wildcards.npdim} {output} >& {log}'        
+        'source /opt/conda/etc/profile.d/conda.sh && conda activate sklearn-env && python src/SSI_fixPredict_PCA.py {input} {wildcards.npdim} {output} >& {log}' 
+        # 'source .bashrc && conda activate sklearn-env && python src/SSI_fixPredict_PCA.py {input} {wildcards.npdim} {output} >& {log}'        
