@@ -81,7 +81,7 @@ rule SSI_scikit_rf_fit_MT:
     log:
         'logs/R_PCA_scaled/train_X/fit/dim_{npdim}.log'
     shell:
-        'source /opt/conda/etc/profile.d/conda.sh && conda activate sklearn-env && python src/SSI_scikit_rf_fit_MT.py {input} {output} >& {log}'
+        'source /opt/conda/etc/profile.d/conda.sh && conda activate sklearn-env && python src/SSI_scikit_rf_fit_MT_180.py {input} {output} >& {log}'
 
 rule test_u_models:
     input:
