@@ -12,7 +12,7 @@ n_pca_dim = ['5']
 
 rule all:
     input:
-        expand('output/R_PCA_scaled/test_X/predict/{npdim}.csv', npdim=n_pca_dim)
+        expand('output/R_PCA_scaled/test_X/predict/dim_{npdim}.csv', npdim=n_pca_dim)
 
 rule preprocess_train:
     input:
@@ -51,68 +51,68 @@ rule preprocess_test:
 
 rule train_u_models:
     input:
-        'data/train_Tensors.RData',
+        'data/train_Tensors.RData'
     output:
-        'output/R_PCA_scaled/train_X/tensor/{npdim}.RData',
-        'output/R_PCA_scaled/train_X/tensor/{npdim}.csv'
+        'output/R_PCA_scaled/train_X/tensor/dim_{npdim}.RData',
+        'output/R_PCA_scaled/train_X/tensor/dim_{npdim}.csv'
     benchmark:
-        'benchmarks/R_PCA_scaled/train_X/tensor/{npdim}.txt'
+        'benchmarks/R_PCA_scaled/train_X/tensor/dim_{npdim}.txt'
     container:
         'docker://koki/tensor-projects-self-incompatible:20221217'
     resources:
         mem_gb=200
     log:
-        'logs/R_PCA_scaled/train_X/tensor/{npdim}.log'
+        'logs/R_PCA_scaled/train_X/tensor/dim_{npdim}.log'
     shell:
         'src/train_Model-PCA_scale_180.sh {input} {wildcards.npdim} {output}  >& {log}'
 
 rule SSI_scikit_rf_fit_MT:
     input:
-        'output/R_PCA_scaled/train_X/tensor/{npdim}.csv',
+        'output/R_PCA_scaled/train_X/tensor/dim_{npdim}.csv',
         'output/SSI/y_r.csv'
     output:
-        'output/R_PCA_scaled/train_X/fit/{npdim}.pickle'
+        'output/R_PCA_scaled/train_X/fit/dim_{npdim}.pickle'
     benchmark:
-        'benchmarks/R_PCA_scaled/train_X/fit/{npdim}.txt'
+        'benchmarks/R_PCA_scaled/train_X/fit/dim_{npdim}.txt'
     container:
         "docker://yamaken37/ssi_sklearn_env:202212141249"
     resources:
         mem_gb=200
     log:
-        'logs/R_PCA_scaled/train_X/fit/{npdim}.log'
+        'logs/R_PCA_scaled/train_X/fit/dim_{npdim}.log'
     shell:
         'source /opt/conda/etc/profile.d/conda.sh && conda activate sklearn-env && python src/SSI_scikit_rf_fit_MT.py {input} {output} >& {log}'
 
 rule test_u_models:
     input:
         'data/test_Tensors.RData',
-        'output/R_PCA_scaled/train_X/tensor/{npdim}.RData'
+        'output/R_PCA_scaled/train_X/tensor/dim_{npdim}.RData'
     output:
-        'output/R_PCA_scaled/test_X/tensor/{npdim}.csv'
+        'output/R_PCA_scaled/test_X/tensor/dim_{npdim}.csv'
     benchmark:
-        'benchmarks/R_PCA_scaled/test_X/tensor/{npdim}.txt'
+        'benchmarks/R_PCA_scaled/test_X/tensor/dim_{npdim}.txt'
     container:
         'docker://koki/tensor-projects-self-incompatible:20221217'
     resources:
         mem_gb=200
     log:
-        'logs/R_PCA_scaled/test_X/tensor/{npdim}.log'
+        'logs/R_PCA_scaled/test_X/tensor/dim_{npdim}.log'
     shell:
         'src/test_Model-PCA_scale_180.sh {input} {output} >& {log}'
 
 rule SSI_U_Predict:
     input:
-        'output/R_PCA_scaled/train_X/fit/{npdim}.pickle',
-        'output/R_PCA_scaled/test_X/tensor/{npdim}.csv'
+        'output/R_PCA_scaled/train_X/fit/dim_{npdim}.pickle',
+        'output/R_PCA_scaled/test_X/tensor/dim_{npdim}.csv'
     output:
-        'output/R_PCA_scaled/test_X/predict/{npdim}.csv'
+        'output/R_PCA_scaled/test_X/predict/dim_{npdim}.csv'
     benchmark:
-        'benchmarks/R_PCA_scaled/test_X/predict/{npdim}.txt'
+        'benchmarks/R_PCA_scaled/test_X/predict/dim_{npdim}.txt'
     container:
         "docker://yamaken37/ssi_sklearn_env:202212141249"
     resources:
         mem_gb=200
     log:
-        'logs/R_PCA_scaled/test_X/predict/{npdim}.log'
+        'logs/R_PCA_scaled/test_X/predict/dim_{npdim}.log'
     shell:
         'source /opt/conda/etc/profile.d/conda.sh && conda activate sklearn-env && python src/SSI_U_Predict.py {input} {output} >& {log}'
