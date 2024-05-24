@@ -51,10 +51,10 @@ rule preprocess_test:
 
 rule train_u_models:
     input:
-        'data/train_Tensors.RData'
+        'data/train_Tensors.RData',
     output:
-        expand('output/R_PCA_scaled/train_X/tensor/{npdim}.RData', npdim=n_pca_dim),
-        expand('output/R_PCA_scaled/train_X/tensor/{npdim}.csv', npdim=n_pca_dim)
+        'output/R_PCA_scaled/train_X/tensor/{npdim}.RData',
+        'output/R_PCA_scaled/train_X/tensor/{npdim}.csv'
     benchmark:
         'benchmarks/R_PCA_scaled/train_X/tensor/{npdim}.txt'
     container:
@@ -64,14 +64,14 @@ rule train_u_models:
     log:
         'logs/R_PCA_scaled/train_X/tensor/{npdim}.log'
     shell:
-        'src/train_Model-PCA_scale_180_180.sh {input} {wildcards.npdim} {output}  >& {log}'
+        'src/train_Model-PCA_scale_180.sh {input} {wildcards.npdim} {output}  >& {log}'
 
 rule SSI_scikit_rf_fit_MT:
     input:
-        expand('output/R_PCA_scaled/train_X/tensor/{npdim}.csv', npdim=n_pca_dim),
+        'output/R_PCA_scaled/train_X/tensor/{npdim}.csv',
         'output/SSI/y_r.csv'
     output:
-        expand('output/R_PCA_scaled/train_X/fit/{npdim}.pickle', npdim=n_pca_dim)
+        'output/R_PCA_scaled/train_X/fit/{npdim}.pickle'
     benchmark:
         'benchmarks/R_PCA_scaled/train_X/fit/{npdim}.txt'
     container:
@@ -86,9 +86,9 @@ rule SSI_scikit_rf_fit_MT:
 rule test_u_models:
     input:
         'data/test_Tensors.RData',
-        expand('output/R_PCA_scaled/train_X/tensor/{npdim}.RData', npdim=n_pca_dim)
+        'output/R_PCA_scaled/train_X/tensor/{npdim}.RData'
     output:
-        expand('output/R_PCA_scaled/test_X/tensor/{npdim}.csv', npdim=n_pca_dim)
+        'output/R_PCA_scaled/test_X/tensor/{npdim}.csv'
     benchmark:
         'benchmarks/R_PCA_scaled/test_X/tensor/{npdim}.txt'
     container:
@@ -102,10 +102,10 @@ rule test_u_models:
 
 rule SSI_U_Predict:
     input:
-        expand('output/R_PCA_scaled/train_X/fit/{npdim}.pickle', npdim=n_pca_dim),
-        expand('output/R_PCA_scaled/test_X/tensor/{npdim}.csv', npdim=n_pca_dim)
+        'output/R_PCA_scaled/train_X/fit/{npdim}.pickle',
+        'output/R_PCA_scaled/test_X/tensor/{npdim}.csv'
     output:
-        expand('output/R_PCA_scaled/test_X/predict/{npdim}.csv', npdim=n_pca_dim)
+        'output/R_PCA_scaled/test_X/predict/{npdim}.csv'
     benchmark:
         'benchmarks/R_PCA_scaled/test_X/predict/{npdim}.txt'
     container:

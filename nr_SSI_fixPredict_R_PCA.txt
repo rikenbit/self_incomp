@@ -1,0 +1,85 @@
+Building DAG of jobs...
+Job stats:
+job                     count    min threads    max threads
+--------------------  -------  -------------  -------------
+SSI_U_Predict               1              1              1
+SSI_scikit_rf_fit_MT        1              1              1
+all                         1              1              1
+test_u_models               1              1              1
+train_u_models              1              1              1
+total                       5              1              1
+
+
+[Fri May 24 19:17:21 2024]
+rule train_u_models:
+    input: data/train_Tensors.RData
+    output: output/R_PCA_scaled/train_X/tensor/5.RData, output/R_PCA_scaled/train_X/tensor/5.csv
+    log: logs/R_PCA_scaled/train_X/tensor/5.log
+    jobid: 3
+    benchmark: benchmarks/R_PCA_scaled/train_X/tensor/5.txt
+    reason: Missing output files: output/R_PCA_scaled/train_X/tensor/5.RData, output/R_PCA_scaled/train_X/tensor/5.csv
+    wildcards: npdim=5
+    resources: tmpdir=/tmp, mem_gb=200
+
+
+[Fri May 24 19:17:21 2024]
+rule SSI_scikit_rf_fit_MT:
+    input: output/R_PCA_scaled/train_X/tensor/5.csv, output/SSI/y_r.csv
+    output: output/R_PCA_scaled/train_X/fit/5.pickle
+    log: logs/R_PCA_scaled/train_X/fit/5.log
+    jobid: 2
+    benchmark: benchmarks/R_PCA_scaled/train_X/fit/5.txt
+    reason: Missing output files: output/R_PCA_scaled/train_X/fit/5.pickle; Input files updated by another job: output/R_PCA_scaled/train_X/tensor/5.csv
+    wildcards: npdim=5
+    resources: tmpdir=/tmp, mem_gb=200
+
+
+[Fri May 24 19:17:21 2024]
+rule test_u_models:
+    input: data/test_Tensors.RData, output/R_PCA_scaled/train_X/tensor/5.RData
+    output: output/R_PCA_scaled/test_X/tensor/5.csv
+    log: logs/R_PCA_scaled/test_X/tensor/5.log
+    jobid: 5
+    benchmark: benchmarks/R_PCA_scaled/test_X/tensor/5.txt
+    reason: Missing output files: output/R_PCA_scaled/test_X/tensor/5.csv; Input files updated by another job: output/R_PCA_scaled/train_X/tensor/5.RData
+    wildcards: npdim=5
+    resources: tmpdir=/tmp, mem_gb=200
+
+
+[Fri May 24 19:17:21 2024]
+rule SSI_U_Predict:
+    input: output/R_PCA_scaled/train_X/fit/5.pickle, output/R_PCA_scaled/test_X/tensor/5.csv
+    output: output/R_PCA_scaled/test_X/predict/5.csv
+    log: logs/R_PCA_scaled/test_X/predict/5.log
+    jobid: 1
+    benchmark: benchmarks/R_PCA_scaled/test_X/predict/5.txt
+    reason: Missing output files: output/R_PCA_scaled/test_X/predict/5.csv; Input files updated by another job: output/R_PCA_scaled/test_X/tensor/5.csv, output/R_PCA_scaled/train_X/fit/5.pickle
+    wildcards: npdim=5
+    resources: tmpdir=/tmp, mem_gb=200
+
+
+[Fri May 24 19:17:21 2024]
+localrule all:
+    input: output/R_PCA_scaled/test_X/predict/5.csv
+    jobid: 0
+    reason: Input files updated by another job: output/R_PCA_scaled/test_X/predict/5.csv
+    resources: tmpdir=/tmp
+
+Job stats:
+job                     count    min threads    max threads
+--------------------  -------  -------------  -------------
+SSI_U_Predict               1              1              1
+SSI_scikit_rf_fit_MT        1              1              1
+all                         1              1              1
+test_u_models               1              1              1
+train_u_models              1              1              1
+total                       5              1              1
+
+Reasons:
+    (check individual jobs above for details)
+    input files updated by another job:
+        SSI_U_Predict, SSI_scikit_rf_fit_MT, all, test_u_models
+    missing output files:
+        SSI_U_Predict, SSI_scikit_rf_fit_MT, test_u_models, train_u_models
+
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
