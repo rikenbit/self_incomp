@@ -1,6 +1,4 @@
 # SSI_fixPredict_R_PCA
-n_pca_dim = ['5']
-
 #### import####
 import itertools as it
 import numpy as np
@@ -8,7 +6,8 @@ import pandas as pd
 from snakemake.utils import min_version
 from snakemake.utils import Paramspace
 
-n_pca_dim = ['5']
+# n_pca_dim = ['5']
+n_pca_dim = list(map(str, range(5, 12)))
 
 rule all:
     input:
@@ -47,7 +46,6 @@ rule preprocess_test:
         'logs/preprocess_test.log'
     shell:
         'src/preprocess_test.sh {input} {output} >& {log}'
-
 
 rule train_u_models:
     input:

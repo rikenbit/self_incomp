@@ -20,10 +20,6 @@ args = sys.argv
 args_input_clf=args[1]
 args_input_test=args[2]
 args_output_predict=args[3]
-#### test args####
-# args_input_clf='output/train_X/fit/MODELS_Model-1-A1G_r1_10_r2_20_r3_10_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx.pickle'
-# args_input_test='output/test_X/tensor/MODELS_Model-1-A1G_r1_10_r2_20_r3_10_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx.csv'
-# args_output_predict='output/test_X/predict/MODELS_Model-1-A1G_r1_10_r2_20_r3_10_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx.csv'
 
 # import pickle clf
 with open(args_input_clf, mode='rb') as fp:
