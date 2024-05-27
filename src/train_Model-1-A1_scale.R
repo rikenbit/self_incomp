@@ -8,6 +8,11 @@ outfile2 <- args[13]
 outfile3 <- args[14]
 pullout_row <- as.numeric(args[10]) #row
 
+# Tensor Parameter
+r1 <- as.numeric(args[1]) #r1
+r2 <- as.numeric(args[2]) #r2
+r3 <- as.numeric(args[3]) #r3
+
 # Loading
 # LRTensor, LigandTensor ,ReceptorTensor
 load(infile)
@@ -16,12 +21,7 @@ LigandTensor <- LigandTensor[-pullout_row,,]
 ReceptorTensor <- ReceptorTensor[-pullout_row,,]
 # y <- y[-pullout_row]
 
-# Parameter
-r1 <- as.numeric(args[1]) #r1
-r2 <- as.numeric(args[2]) #r2
-r3 <- as.numeric(args[3]) #r3
-
-
+# preparation Tensor
 params <- new("CoupledMWCAParams",
     # Data-wise setting
     Xs=list(X1=LRTensor),
@@ -50,23 +50,22 @@ res <- CoupledMWCA(params)
 X <- t(res@common_factors$A1)
 
 # Save
-# save(res, file=outfile1)
 # before Tensor Dec. 179row Tensor
 save(res, LRTensor, LigandTensor, ReceptorTensor, file=outfile1)
 write.csv(X, file=outfile2, row.names = FALSE)
 
-# Save for 射影
+# Save for 射影 Testデータ用の1スライスTensorの作成
 load(infile)
-LRTensor <- array(LRTensor[pullout_row,,],
+one_LRTensor <- array(LRTensor[pullout_row,,],
                   c(1, dim(LRTensor[pullout_row,,]))
                   )
-LigandTensor <- array(LigandTensor[pullout_row,,],
+one_LigandTensor <- array(LigandTensor[pullout_row,,],
                       c(1, dim(LigandTensor[pullout_row,,]))
                       )
-ReceptorTensor <- array(ReceptorTensor[pullout_row,,],
+one_ReceptorTensor <- array(ReceptorTensor[pullout_row,,],
                   c(1, dim(ReceptorTensor[pullout_row,,]))
                   )
 # LRTensor <- LRTensor[pullout_row,,]
 # LigandTensor <- LigandTensor[pullout_row,,]
 # ReceptorTensor <- ReceptorTensor[pullout_row,,]
-save(LRTensor, LigandTensor, ReceptorTensor, file=outfile3)
+save(one_LRTensor, one_LigandTensor, one_ReceptorTensor, file=outfile3)

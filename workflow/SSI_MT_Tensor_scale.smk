@@ -33,7 +33,7 @@ paramspace = Paramspace(df_test, filename_params=['MODELS', 'r1', 'r2', 'r3', 'r
 
 rule all:
     input:
-        expand('output/pyPCA_scaled/test_X/predict/{params}.csv', params = paramspace.instance_patterns)
+        expand('output/Tensor_scale/test_X/predict/{params}.csv', params = paramspace.instance_patterns)
 
 rule preprocess_train:
     input:
@@ -56,9 +56,9 @@ rule train_u_models:
     input:
         'data/train_Tensors.RData'
     output:
-        expand('output/pyPCA_scaled/train_X/tensor/{params}.RData', params = paramspace.wildcard_pattern),
-        expand('output/pyPCA_scaled/train_X/tensor/{params}.csv', params = paramspace.wildcard_pattern),
-        expand('output/pyPCA_scaled/train_X/one_slice_tensor/{params}.RData', params = paramspace.wildcard_pattern)
+        expand('output/Tensor_scale/train_X/tensor/{params}.RData', params = paramspace.wildcard_pattern),
+        expand('output/Tensor_scale/train_X/tensor/{params}.csv', params = paramspace.wildcard_pattern),
+        expand('output/Tensor_scale/train_X/one_slice_tensor/{params}.RData', params = paramspace.wildcard_pattern)
     params:
         args0 = lambda w: w["MODELS"],
         args1 = lambda w: w["r1"],
@@ -72,67 +72,67 @@ rule train_u_models:
         args9 = lambda w: w["r3R"],
         args10 = lambda w: w["row"]
     benchmark:
-        f'benchmarks/pyPCA_scaled/train_X/tensor/{paramspace.wildcard_pattern}.txt'
+        f'benchmarks/Tensor_scale/train_X/tensor/{paramspace.wildcard_pattern}.txt'
     container:
         'docker://koki/tensor-projects-self-incompatible:20221217'
     resources:
         mem_gb=200
     log:
-        f'logs/pyPCA_scaled/train_X/tensor/{paramspace.wildcard_pattern}.log'
+        f'logs/Tensor_scale/train_X/tensor/{paramspace.wildcard_pattern}.log'
     shell:
-        'src/train_{params.args0}_scale.sh {params.args1} {params.args2} {params.args3} {params.args4} {params.args5} {params.args6} {params.args7} {params.args8} {params.args9} {params.args10} {input} {output}  >& {log}'
+        'src/train_{params.args0}_scale.sh {params.args1} {params.args2} {params.args3} {params.args4} {params.args5} {params.args6} {params.args7} {params.args8} {params.args9} {params.args10} {input} {output} >& {log}'
 
 rule SSI_scikit_rf_fit_MT:
     input:
-        expand('output/pyPCA_scaled/train_X/tensor/{params}.csv', params = paramspace.wildcard_pattern),
+        expand('output/Tensor_scale/train_X/tensor/{params}.csv', params = paramspace.wildcard_pattern),
         'output/SSI/y_r.csv'
     output:
-        expand('output/pyPCA_scaled/train_X/fit/{params}.pickle', params = paramspace.wildcard_pattern)
+        expand('output/Tensor_scale/train_X/fit/{params}.pickle', params = paramspace.wildcard_pattern)
     params:
         args10 = lambda w: w["row"]
     benchmark:
-        f'benchmarks/pyPCA_scaled/train_X/fit/{paramspace.wildcard_pattern}.txt'
+        f'benchmarks/Tensor_scale/train_X/fit/{paramspace.wildcard_pattern}.txt'
     container:
         "docker://yamaken37/ssi_sklearn_env:202212141249"
     resources:
         mem_gb=200
     log:
-        f'logs/pyPCA_scaled/train_X/fit/{paramspace.wildcard_pattern}.log'
+        f'logs/Tensor_scale/train_X/fit/{paramspace.wildcard_pattern}.log'
     shell:
         'source /opt/conda/etc/profile.d/conda.sh && conda activate sklearn-env && python src/SSI_scikit_rf_fit_MT.py {input} {output} {params.args10} >& {log}'
 
 rule test_u_models:
     input:
-        expand('output/pyPCA_scaled/train_X/one_slice_tensor/{params}.RData', params = paramspace.wildcard_pattern),
-        expand('output/pyPCA_scaled/train_X/tensor/{params}.RData', params = paramspace.wildcard_pattern)
+        expand('output/Tensor_scale/train_X/one_slice_tensor/{params}.RData', params = paramspace.wildcard_pattern),
+        expand('output/Tensor_scale/train_X/tensor/{params}.RData', params = paramspace.wildcard_pattern)
     output:
-        expand('output/pyPCA_scaled/test_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
+        expand('output/Tensor_scale/test_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
     params:
         args0 = lambda w: w["MODELS"]
     benchmark:
-        f'benchmarks/pyPCA_scaled/test_X/tensor/{paramspace.wildcard_pattern}.txt'
+        f'benchmarks/Tensor_scale/test_X/tensor/{paramspace.wildcard_pattern}.txt'
     container:
         'docker://koki/tensor-projects-self-incompatible:20221217'
     resources:
         mem_gb=200
     log:
-        f'logs/pyPCA_scaled/test_X/tensor/{paramspace.wildcard_pattern}.log'
+        f'logs/Tensor_scale/test_X/tensor/{paramspace.wildcard_pattern}.log'
     shell:
         'src/test_{params.args0}_scale.sh {input} {output} >& {log}'
 
 rule SSI_U_Predict:
     input:
-        expand('output/pyPCA_scaled/train_X/fit/{params}.pickle', params = paramspace.wildcard_pattern),
-        expand('output/pyPCA_scaled/test_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
+        expand('output/Tensor_scale/train_X/fit/{params}.pickle', params = paramspace.wildcard_pattern),
+        expand('output/Tensor_scale/test_X/tensor/{params}.csv', params = paramspace.wildcard_pattern)
     output:
-        expand('output/pyPCA_scaled/test_X/predict/{params}.csv', params = paramspace.wildcard_pattern)
+        expand('output/Tensor_scale/test_X/predict/{params}.csv', params = paramspace.wildcard_pattern)
     benchmark:
-        f'benchmarks/pyPCA_scaled/test_X/predict/{paramspace.wildcard_pattern}.txt'
+        f'benchmarks/Tensor_scale/test_X/predict/{paramspace.wildcard_pattern}.txt'
     container:
         "docker://yamaken37/ssi_sklearn_env:202212141249"
     resources:
         mem_gb=200
     log:
-        f'logs/pyPCA_scaled/test_X/predict/{paramspace.wildcard_pattern}.log'
+        f'logs/Tensor_scale/test_X/predict/{paramspace.wildcard_pattern}.log'
     shell:
         'source /opt/conda/etc/profile.d/conda.sh && conda activate sklearn-env && python src/SSI_U_Predict.py {input} {output} >& {log}'
