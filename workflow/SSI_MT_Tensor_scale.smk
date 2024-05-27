@@ -1,5 +1,4 @@
 # SSI_MT_Tensor_scale
-# SSI_MT_preprocess_PCA_scale
 ###################################################
 #### import####
 import itertools as it
