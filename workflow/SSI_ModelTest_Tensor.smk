@@ -10,12 +10,9 @@ from snakemake.utils import Paramspace
 # N_row
 pullout_row = list(map(str, range(1, 181)))
 
-# list_LOOCV = [
-# 'MODELS_Model-PCA_r1_xx_r2_11_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx_row'
-# ]
-# Model-1-A1
+# Model-1-A1 _row追加
 list_LOOCV = [
-'MODELS_Model-1-A1_r1_20_r2_100_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx'
+'MODELS_Model-1-A1_r1_20_r2_100_r3_5_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx_row'
 ]
 
 rule all:
