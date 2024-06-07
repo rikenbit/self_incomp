@@ -1,4 +1,4 @@
-# SSI_MT_prcompprcompTensor_scale
+# SSI_MT_prcompTensor_scale
 ###################################################
 #### import####
 import itertools as it
