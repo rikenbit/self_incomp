@@ -17,24 +17,24 @@ list_LOOCV = [
 
 rule all:
     input:
-        expand('output/Tensor_scale/test_X/predict_df/{list_l}.csv', list_l=list_LOOCV)
+        expand('output/Tensor_scale_Train/test_X/predict_df/{list_l}.csv', list_l=list_LOOCV)
 
 rule SSI_ModelTest:
     input:
-        expand('output/Tensor_scale/test_X/predict/{list_l}_{p_row}.csv', list_l=list_LOOCV, p_row=pullout_row)
+        expand('output/Tensor_scale_Train/test_X/predict/{list_l}_{p_row}.csv', list_l=list_LOOCV, p_row=pullout_row)
     output:
-        'output/Tensor_scale/test_X/predict_df/{list_l}.csv'
+        'output/Tensor_scale_Train/test_X/predict_df/{list_l}.csv'
     params:
-        'output/Tensor_scale/test_X/predict',
-        'output/Tensor_scale/test_X/predict/',
+        'output/Tensor_scale_Train/test_X/predict',
+        'output/Tensor_scale_Train/test_X/predict/',
         'output/SSI/y_r.csv'
     benchmark:
-        'benchmarks/Tensor_scale/test_X/predict_df/{list_l}.txt'
+        'benchmarks/Tensor_scale_Train/test_X/predict_df/{list_l}.txt'
     container:
         "docker://yamaken37/biostrings_tidy:2023020717"
     resources:
         mem_gb=200
     log:
-        'logs/Tensor_scale/test_X/predict_df/{list_l}.log'
+        'logs/Tensor_scale_Train/test_X/predict_df/{list_l}.log'
     shell:
         'src/SSI_ModelTest.sh {output} {params} {wildcards.list_l} >& {log}'
