@@ -19,21 +19,18 @@ load(infile)
 LRTensor <- LRTensor[-pullout_row,,]
 LigandTensor <- LigandTensor[-pullout_row,,]
 ReceptorTensor <- ReceptorTensor[-pullout_row,,]
-# y <- y[-pullout_row]
 
-#### trainでのscale処理 ######
-# 3階テンソルから平均行列を算出
-# mean_X1 <- einsum('ijk->jk', X) / dim(X)[1] # einsum利用の場合
-# LRTensor is before Tensor Decomposition
-mean_X1 <- einsum('ijk->jk', LRTensor) / dim(LRTensor)[1] # einsum利用の場合
-# 3階テンソルから平均行列を引く
-X_new <- sweep(LRTensor, MARGIN=c(2,3), STATS=mean_X1)
-##########
+############
+# Reshape
+data <- rs_unfold(as.tensor(LRTensor), m=1)@data
+scaled_data <- scale(data, center=TRUE, scale=FALSE)
+scaled_LRTensor <- fold(scaled_data)
+############
 
 # preparation Tensor
 params <- new("CoupledMWCAParams",
     # Data-wise setting
-    Xs=list(X1=X_new),
+    Xs=list(X1=scaled_LRTensor),
     mask=list(X1=NULL),
     weights=list(X1=1),
     # Common Factor Matrices

@@ -1,4 +1,4 @@
-# SSI_MT_Tensor_scale
+# SSI_MT_prcompTensor_scale
 ###################################################
 #### import####
 import itertools as it
@@ -79,7 +79,7 @@ rule train_u_models:
     log:
         f'logs/Tensor_scale/train_X/tensor/{paramspace.wildcard_pattern}.log'
     shell:
-        'src/train_{params.args0}_scale.sh {params.args1} {params.args2} {params.args3} {params.args4} {params.args5} {params.args6} {params.args7} {params.args8} {params.args9} {params.args10} {input} {output} >& {log}'
+        'src/train_prcomp_{params.args0}_scale.sh {params.args1} {params.args2} {params.args3} {params.args4} {params.args5} {params.args6} {params.args7} {params.args8} {params.args9} {params.args10} {input} {output} >& {log}'
 
 rule SSI_scikit_rf_fit_MT:
     input:
