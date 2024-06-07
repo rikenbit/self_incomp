@@ -11,7 +11,7 @@ from snakemake.utils import Paramspace
 pullout_row = list(map(str, range(1, 181)))
 
 list_LOOCV = [
-'MODELS_Model-PCA_r1_xx_r2_4_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx_row'
+'MODELS_Model-SVD_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx_row'
 ]
 # list_LOOCV = [
 # 'MODELS_Model-PCA_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx_row'
