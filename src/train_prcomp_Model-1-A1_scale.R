@@ -22,9 +22,9 @@ ReceptorTensor <- ReceptorTensor[-pullout_row,,]
 
 ############
 # Reshape
-data <- rs_unfold(as.tensor(LRTensor), m=1)@data
-scaled_data <- scale(data, center=TRUE, scale=FALSE)
-scaled_LRTensor <- fold(scaled_data)
+data_unfold <- unfold(as.tensor(LRTensor), row_idx=1, col_idx=c(2,3))@data
+scaled_data <- scale(data_unfold, center=TRUE, scale=FALSE)
+scaled_LRTensor <- fold(as.tensor(scaled_data), row_idx=1, col_idx=c(2,3), modes = dim(LRTensor))@data
 ############
 
 # preparation Tensor
