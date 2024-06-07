@@ -13,7 +13,19 @@ pullout_row = list(map(str, range(1, 181)))
 # list_LOOCV = [
 # 'MODELS_Model-PCA_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx'
 # ]
+# list_LOOCV = [
+# 'MODELS_Model-PCA_r1_xx_r2_5_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-PCA_r1_xx_r2_6_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-PCA_r1_xx_r2_7_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-PCA_r1_xx_r2_8_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-PCA_r1_xx_r2_9_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# 'MODELS_Model-PCA_r1_xx_r2_11_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+# ]
+
 list_LOOCV = [
+'MODELS_Model-PCA_r1_xx_r2_2_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+'MODELS_Model-PCA_r1_xx_r2_3_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
+'MODELS_Model-PCA_r1_xx_r2_4_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
 'MODELS_Model-PCA_r1_xx_r2_5_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
 'MODELS_Model-PCA_r1_xx_r2_6_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
 'MODELS_Model-PCA_r1_xx_r2_7_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx',
