@@ -155,8 +155,8 @@ rule test_u_models:
     log:
         f'logs/nwTensor/test_X/tensor/{paramspace.wildcard_pattern}.log'
     shell:
-        # 'src/test_{params.args0}.sh {input} {output} >& {log}'
-        'src/test_Model-PCA_scale.sh {input} {output} >& {log}'
+        'src/test_{params.args0}.sh {input} {output} >& {log}'
+        # 'src/test_Model-PCA_scale.sh {input} {output} >& {log}'
 
 rule SSI_U_Predict:
     input:
