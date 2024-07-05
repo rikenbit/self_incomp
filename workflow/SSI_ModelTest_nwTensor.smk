@@ -1,0 +1,42 @@
+# SSI_ModelTest_nwTensor
+###################################################
+#### import####
+import itertools as it
+import numpy as np
+import pandas as pd
+from snakemake.utils import min_version
+from snakemake.utils import Paramspace
+
+# N_row
+pullout_row = list(map(str, range(1, 181)))
+
+list_LOOCV = [
+'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_30_r1R_30_r2L_Tucker_r2R_xx_r3L_xx_r3R_xx_row'
+]
+# list_LOOCV = [
+# 'MODELS_Model-PCA_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx_row'
+# ]
+
+rule all:
+    input:
+        expand('output/nwTensor/test_X/predict_df/{list_l}.csv', list_l=list_LOOCV)
+
+rule SSI_ModelTest:
+    input:
+        expand('output/nwTensor/test_X/predict/{list_l}_{p_row}.csv', list_l=list_LOOCV, p_row=pullout_row)
+    output:
+        'output/nwTensor/test_X/predict_df/{list_l}.csv'
+    params:
+        'output/nwTensor/test_X/predict',
+        'output/nwTensor/test_X/predict/',
+        'output/SSI/y_r.csv'
+    benchmark:
+        'benchmarks/nwTensor/test_X/predict_df/{list_l}.txt'
+    container:
+        "docker://yamaken37/biostrings_tidy:2023020717"
+    resources:
+        mem_gb=200
+    log:
+        'logs/nwTensor/test_X/predict_df/{list_l}.log'
+    shell:
+        'src/SSI_ModelTest.sh {output} {params} {wildcards.list_l} >& {log}'
