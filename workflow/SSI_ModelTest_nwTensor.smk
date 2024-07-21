@@ -11,7 +11,7 @@ from snakemake.utils import Paramspace
 pullout_row = list(map(str, range(1, 181)))
 
 list_LOOCV = [
-'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_30_r1R_30_r2L_Tucker_r2R_xx_r3L_xx_r3R_xx_row',
+# 'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_30_r1R_30_r2L_Tucker_r2R_xx_r3L_xx_r3R_xx_row',
 'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_1_r1R_1_r2L_Tucker_r2R_xx_r3L_xx_r3R_xx_row',
 'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_1_r1R_30_r2L_Tucker_r2R_xx_r3L_xx_r3R_xx_row',
 'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_30_r1R_1_r2L_Tucker_r2R_xx_r3L_xx_r3R_xx_row',
@@ -20,9 +20,6 @@ list_LOOCV = [
 'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_1_r1R_30_r2L_CP_r2R_xx_r3L_xx_r3R_xx_row',
 'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_30_r1R_1_r2L_CP_r2R_xx_r3L_xx_r3R_xx_row'
 ]
-# list_LOOCV = [
-# 'MODELS_Model-PCA_r1_xx_r2_10_r3_xx_r1L_xx_r1R_xx_r2L_xx_r2R_xx_r3L_xx_r3R_xx_row'
-# ]
 
 rule all:
     input:
