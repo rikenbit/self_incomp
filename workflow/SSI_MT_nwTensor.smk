@@ -13,15 +13,12 @@ pullout_row = list(map(str, range(1, 181)))
 # r1をcommon_dimsのA1, r2をcommon_dimsのA2, に使う
 # r1Lを common_iteration-A1  r1Rをcommon_iteration-A2, に使う
 # r2Lを common_coretypeに使う
+# common_iteration = list(A1=100, A2=100)
+# common_dims = list(A1=20, A2=20)
+# common_coretype= "Tucker" or "CP"
 list_LOOCV = [
-'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_500_r1R_500_r2L_Tucker_r2R_xx_r3L_xx_r3R_xx',
 'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_100_r1R_100_r2L_Tucker_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_100_r1R_500_r2L_Tucker_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_500_r1R_100_r2L_Tucker_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_500_r1R_500_r2L_CP_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_100_r1R_100_r2L_CP_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_100_r1R_500_r2L_CP_r2R_xx_r3L_xx_r3R_xx',
-'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_500_r1R_100_r2L_CP_r2R_xx_r3L_xx_r3R_xx'
+'MODELS_Model-nwTensor_r1_20_r2_20_r3_xx_r1L_100_r1R_100_r2L_CP_r2R_xx_r3L_xx_r3R_xx'
 ]
 
 list_join = list(it.product(list_LOOCV,pullout_row))
